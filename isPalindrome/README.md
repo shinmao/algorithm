@@ -1,7 +1,9 @@
 # isPalindrome
+
 Palindrome means that we can get the same string no matter from left or right side.
 
 ## Lintcode627
+
 > Description: Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.
 
 > I find that there are only two ways of palindromes. The first one is the oddPalindrome, which is composed of one element in the center and evenPalindrome on the both side. e.g. cbabc. The second one is evenPalindrome, which is composed of two elements in the center and evenPalindrome on the both side.
@@ -13,4 +15,5 @@ Palindrome means that we can get the same string no matter from left or right si
 
 > Different from the problem of lintcode627, this problem wants to find the substring.
 
-* [Dynamic programming](): Dynamic programming is kind of bottom-up approach. Palindrome should be `(a) + sub-palindrome + (a)`, which means that palindrome should be consist of sub-palindrome. Therefore, we can start from the base cases such like `isPalindrome[i][i]` and `isPalindrome[i][i+1]`, and use the base cases to solve the bigger problem.
+
+* [Dynamic programming](https://github.com/shinmao/algorithm/blob/master/isPalindrome/lintcode200-1.java): Dynamic programming is kind of bottom-up approach. Palindrome should be `(a) + sub-palindrome + (a)`, which means that palindrome should be consist of sub-palindrome. Therefore, we can start from the base cases such like `isPalindrome[i][i]` and `isPalindrome[i][i+1]`, and use the base cases to solve the bigger problem.
