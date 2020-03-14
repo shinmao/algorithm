@@ -3,7 +3,6 @@
 Palindrome means that we can get the same string no matter from left or right side.
 
 ## Lintcode627
-
 > Description: Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.
 
 > I find that there are only two ways of palindromes. The first one is the oddPalindrome, which is composed of one element in the center and evenPalindrome on the both side. e.g. cbabc. The second one is evenPalindrome, which is composed of two elements in the center and evenPalindrome on the both side.
@@ -17,3 +16,9 @@ Palindrome means that we can get the same string no matter from left or right si
 
 
 * [Dynamic programming](https://github.com/shinmao/algorithm/blob/master/isPalindrome/lintcode200-1.java): Dynamic programming is kind of bottom-up approach. Palindrome should be `(a) + sub-palindrome + (a)`, which means that palindrome should be consist of sub-palindrome. Therefore, we can start from the base cases such like `isPalindrome[i][i]` and `isPalindrome[i][i+1]`, and use the base cases to solve the bigger problem.
+
+## Lintcode891
+> Description: Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.
+
+* [Memory limit exceeded](https://github.com/shinmao/algorithm/blob/master/isPalindrome/lintcode891-1.java): I use dynamic programming to create an array of `isPalindrome`. Same way to validate palindrome from left side and right side. If characters at left index and right index are different, try deleting either one to check whether palindrome. However, memory limit is exceeded due to my space complexity. (DP would cause to memory problem easily because of array)
+* [While double pointer](https://github.com/shinmao/algorithm/blob/master/isPalindrome/lintcode891-2.java): Same method to solve the problem; however, there aren't array to cause to space complexity problem.
