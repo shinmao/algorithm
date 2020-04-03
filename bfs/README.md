@@ -16,3 +16,21 @@
 
 * [BFS](https://github.com/shinmao/algorithm/blob/master/bfs/lintcode7-1.java): Dive deep into the comments of this problem!
 > 反序列化的過程中可以用node的index來判斷是否treenode的left child
+
+```
+Topological sorting 拓樸排序 - 不是一種排序法
+多出現在 directed graph
+在sort order中每個node只會出現一次
+若 A-> B，sort中A也應該在B前面
+```
+
+## Topological Sorting
+> Description: Given an directed graph, a topological order of the graph nodes is defined as follow: 1. For each directed edge A -> B in graph, A must before B in the order list. 2. The first node in the order can be any node in the graph with no nodes direct to it. Find any topological order for the given graph.
+
+* [BFS](https://github.com/shinmao/algorithm/blob/master/bfs/lintcode127-1/java)
+
+## Course Schedule
+> Description: There are a total of n courses you have to take, labeled from 0 to n - 1. Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]. Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
+
+* [BFS](https://github.com/shinmao/algorithm/blob/master/bfs/lintcode615-1.java): Change the prerequisite format back to the neighbor format which we are familiar with, then use simple topological sorting to solve the problem.
+> 這題講白了點就是包裝了拓樸排序，先修課程和課程的順序不能弄倒，這就是拓樸排序的特點! 另外要判斷拓樸排序存不存在，只要看排完的時候，有沒有全部的點都排到即可!
