@@ -18,6 +18,20 @@ public class FloydWarshall {
                 }
             }
         }
+        if(negative_cycle()){
+            System.out.println("There is a negative cycle!");
+        }else{
+            ptDst();
+        }
+    }
+
+    boolean negative_cycle(){
+        for(int i = 0; i < num; i++){
+            if(graph[i][i] < 0){
+                return true;
+            }
+        }
+        return false;
     }
 
     void ptDst(){
@@ -38,6 +52,5 @@ public class FloydWarshall {
         };
         FloydWarshall fw = new FloydWarshall(graph, num);
         fw.fw();
-        fw.ptDst();
     }
 }
