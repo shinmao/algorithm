@@ -9,6 +9,7 @@ public class FloydWarshall {
     }
 
     void fw(){
+        // also can put k loop inside
         for(int k = 0; k < num; k++){
             for(int i = 0; i < num; i++){
                 for(int j = 0; j < num; j++){
