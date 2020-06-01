@@ -42,3 +42,44 @@ class Solution {
         return minsize;
     }
 }
+
+// version 2: don't need to use tail hashmap
+// just one loop, each time update the length
+// still only defeat 48.54%
+class Solution {
+    public int findShortestSubArray(int[] nums) {
+        if(nums == null || nums.length == 0){
+            return 0;
+        }
+        if(nums.length == 1){
+            return 1;
+        }
+        
+        // first<element, index>: first index of element
+        Map<Integer, Integer> first = new HashMap<>();
+        Map<Integer, Integer> deg = new HashMap<>();
+        int most_deg = 1;
+        int len = nums.length;
+        
+        first.put(nums[0], 0);
+        deg.put(nums[0], 1);
+        
+        for(int i = 1; i < nums.length; i++){
+            if(first.containsKey(nums[i])){
+                deg.replace(nums[i], deg.get(nums[i]) + 1);
+            }else{
+                first.put(nums[i], i);
+                deg.put(nums[i], 1);
+            }
+            
+            if(deg.get(nums[i]) > most_deg){
+                most_deg = deg.get(nums[i]);
+                len = i - first.get(nums[i]) + 1;
+            }else if(deg.get(nums[i]) == most_deg){
+                len = Math.min(len, i - first.get(nums[i]) + 1);
+            }
+        }
+        
+        return len;
+    }
+}
