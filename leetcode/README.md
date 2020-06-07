@@ -18,6 +18,8 @@
 | Course Schedule III   | [630](./leetcode630.java)      |:star:| [Sort in ascending or descending](#sort-in-ascending-order-or-descending-order) |
 | Course Schedule IV   | [1462](./leetcode1462.java)      |:star:| Floyd-Warshall |
 | Split Array into Consecutive Subsequences   | [659](./leetcode659.java)      |:star:|   |
+| Triangle   | [120](./leetcode120.java)      |:star:| [DP](#dp)  |
+| Palindrome Partitioning   | [131](./leetcode131.java)      |:star:|  |
 
 ## Notes
 ### BFS Topological sort
@@ -50,7 +52,7 @@ comparator in descending order:
 1. make sure problem state  
 we usually create an array for DP, we should make sure what each elements represents for first, which is also mean make sure problem state.  
 First, **the state before the last step**. Take coins problem to get minimum number of coins for example, we want the sum of coins to be 27, then the state before the last step should be **(27 - ak)** if our coins are a1, a2, ...ak, ai can be 2 or 5.  
-Second, **define subproblem**. So, what is the minimum number of coins whose sum is (27 - ak)? This is a subproblem. Now, we can find the relationship between subproblem and original problem. ak should be 2 or 5, so `P(27) = P(27 - 2) + 1` or `P(27) = P(27 - 5) + 1`.  
+Second, **define subproblem**. So, what is the minimum number of coins whose sum is (27 - ak)? This is a subproblem. Now, we can **find the relationship between subproblem and original problem**. ak should be 2 or 5, so `P(27) = P(27 - 2) + 1` or `P(27) = P(27 - 5) + 1`.  
 2. formulate problem transition  
 problem transition can be interpreted as problem relationship. we have found relationship between subproblem and original problem. it can be formulated as `P(x) = min(P(x-2) + 1, P(x-5) + 1)`.  
 3. follow actual logic to set initial condition and boundary  
