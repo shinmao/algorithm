@@ -20,6 +20,10 @@
 | Split Array into Consecutive Subsequences   | [659](./leetcode659.java)      |:star:|   |
 | Triangle   | [120](./leetcode120.java)      |:star:| [DP](#dp)  |
 | Palindrome Partitioning   | [131](./leetcode131.java)      |:star:|  |
+| Longest Consecutive Sequence   | [128](./leetcode128.java)      ||  |
+| Largest Rectangle in Histogram   | [84](./leetcode84.java)      |:star:| monotonic stack |
+| Next Greater Element I   | [496](./leetcode496.java)      || monotonic stack |
+| Next Greater Element II   | [503](./leetcode503.java)      || monotonic stack |
 
 ## Notes
 ### BFS Topological sort
@@ -59,3 +63,11 @@ problem transition can be interpreted as problem relationship. we have found rel
 check some cases such as index out of bound. we always need to initialize some state by hands, e.g. `P(0) = 0`.  
 4. make sure the order of calculation  
 `P(1)`, `P(2)` first or `P(27)`, `P(26)` first? The best way to make sure about order is check formula. When you want to get the result of left side, have you already get the all results of right side?  
+
+> DP is used to optimize the problem of O(2^n), O(n^n), O(n!) to O(n^2), O(n^3), or O(n^4) (Polynomial). If a problem can already be solved in poly time, then DP cannot be used on such problem.
+
+### Time complexity of some core library functions
+```java
+Arrays.sort(array);
+```
+This takes `O(nlogn)` of time.
