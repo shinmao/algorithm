@@ -24,6 +24,9 @@
 | Largest Rectangle in Histogram   | [84](./leetcode84.java)      |:star:| monotonic stack |
 | Next Greater Element I   | [496](./leetcode496.java)      || monotonic stack |
 | Next Greater Element II   | [503](./leetcode503.java)      || monotonic stack |
+| Trapping Rain Water I   | [42](./leetcode42.java)      |:star:| monotonic stack |
+| Two Sum   | [1](./leetcode1.java)      || |
+
 
 ## Notes
 ### BFS Topological sort
