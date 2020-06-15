@@ -24,3 +24,49 @@ class Solution {
         return dp[s.length()][p.length()];
     }
 }
+
+// same idea as wildcard matching
+// beats over 100% of submission
+class Solution {
+    private boolean isEmpty(String p, int pIndex){
+        // format such like "x*x*"
+        for(int i = pIndex; i < p.length(); i+=2){
+            if(i + 1 >= p.length() || p.charAt(i + 1) != '*') return false;
+        }
+        return true;
+    }
+    
+    private boolean isMatchHelper(String s, int sIndex, String p, int pIndex, boolean[][] memo, boolean[][] visited){
+        if(pIndex == p.length()) return sIndex == s.length();
+        if(sIndex == s.length()) return isEmpty(p, pIndex);
+        if(visited[sIndex][pIndex]) return memo[sIndex][pIndex];
+        
+        char sChar = s.charAt(sIndex);
+        char pChar = p.charAt(pIndex);
+        boolean match;
+        
+        // consider x* as a bundle
+        if(pIndex + 1 < p.length() && p.charAt(pIndex + 1) == '*'){
+            // '*' matches zero of preceding element
+            // '*' matches more of preceding element
+            match = isMatchHelper(s, sIndex, p, pIndex+2, memo, visited) ||
+                (sChar == pChar || pChar == '.') &&
+                isMatchHelper(s, sIndex+1, p, pIndex, memo, visited);
+        }else{
+            match = (sChar == pChar || pChar == '.') &&
+                isMatchHelper(s, sIndex+1, p, pIndex+1, memo, visited);
+        }
+        
+        visited[sIndex][pIndex] = true;
+        memo[sIndex][pIndex] = match;
+        return match;
+    }
+    
+    public boolean isMatch(String s, String p) {
+        if(s == null || p == null) return false;
+        
+        boolean[][] memo = new boolean[s.length()][p.length()];
+        boolean[][] visited = new boolean[s.length()][p.length()];
+        return isMatchHelper(s, 0, p, 0, memo, visited);
+    }
+}

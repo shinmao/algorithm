@@ -51,7 +51,8 @@ class Solution {
         if(s.length() == 0){
             return result;
         }
-    
+        
+        // if the whole string itself is a keyword in dict
         if(wordDict.contains(s)){
             result.add(s);
         }

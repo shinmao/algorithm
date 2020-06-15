@@ -45,3 +45,47 @@ class Solution {
         return dp[s.length()];
     }
 }
+
+// 點子跟上一個 solution 非常相似
+// 都是將之前前i個的可行結果保留下來
+// 我認為優化的地方在於for loop的內層
+// 上面最糟的情況下會將i個length都枚舉出來
+// 這裏排除了枚舉超過字典中的最長長度(不可能出現的segmentation case)
+// beats over 98% of submission
+class Solution {
+    // get the longest length in dict
+    private int getMaxLength(List<String> dict){
+        int maxLength = 0;
+        for(String word : dict){
+            maxLength = Math.max(maxLength, word.length());
+        }
+        return maxLength;
+    }
+    
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if(s.length() == 0) return true;
+        
+        int maxLength = getMaxLength(wordDict);
+        // canSegment[i]: 0 to index i can be segment or not
+        boolean[] canSegment = new boolean[s.length() + 1];
+        
+        // cal order: canSegment[i = 0->1->2->3...i->...n]
+        canSegment[0] = true;
+        for(int i = 1; i <= s.length(); i++){
+            // enumerate dict word with length
+            for(int lastWordLength = 1;
+                    lastWordLength <= maxLength && lastWordLength <= i;
+                    lastWordLength++){
+                // so we already know canSegment[i-word] here
+                if(!canSegment[i-lastWordLength]) continue;
+                String word = s.substring(i-lastWordLength, i);
+                if(wordDict.contains(word)){
+                    canSegment[i] = true;
+                    break;
+                }
+            }
+        }
+        
+        return canSegment[s.length()];
+    }
+}

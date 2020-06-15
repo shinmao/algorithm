@@ -2,16 +2,16 @@
 | Problem        | Solution           | Cheat  | Writeup  |
 | ------------- |-------------|-----|-----|
 | Maximum Subarray   | [53](./leetcode53.java)      ||   |
-| Edit Distance    | [72](./leetcode72-1.java)      |:star:|   |
-| Longest Increasing Subsequence  | [300](./leetcode300-1.java)      |  |   |
-| Longest Common Subsequence  | [1143](./leetcode1143-1.java)      |:star:|   |
-| Longest Palindrome Subsequence    | [516](./leetcode516-1.java)      |:star:|   |
-| Best Time to Buy and Sell Stock    | [121](./leetcode121-1.java)      |:star:| [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#121-best-time-to-buy-and-sell-stock)  |
+| Edit Distance    | [72](./leetcode72.java)      |:star:|   |
+| Longest Increasing Subsequence  | [300](./leetcode300.java)      |  |   |
+| Longest Common Subsequence  | [1143](./leetcode1143.java)      |:star:|   |
+| Longest Palindrome Subsequence    | [516](./leetcode516.java)      |:star:|   |
+| Best Time to Buy and Sell Stock    | [121](./leetcode121.java)      |:star:| [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#121-best-time-to-buy-and-sell-stock)  |
 | Best Time to Buy and Sell Stock III   | [123](./leetcode123.java)      |:star:| [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#123-best-time-to-buy-and-sell-stock-iii)  |
 | Best Time to Buy and Sell Stock IV   | [188](./leetcode188.java)      || [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#188-best-time-to-buy-and-sell-stock-iv)  |
 | Best Time to Buy and Sell Stock with Cooldown   | [309](./leetcode309.java)      |:star:| [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#309-best-time-to-buy-and-sell-stock-with-cooldown)  |
 | Best Time to Buy and Sell Stock with Transaction Fee   | [714](./leetcode714.java)      || [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#714-best-time-to-buy-and-sell-stock-with-transaction-fee)  |
-| Maximum Product Subarray    | [152](./leetcode152-1.java)      |:star:|   |
+| Maximum Product Subarray    | [152](./leetcode152.java)      |:star:|   |
 | Degree of an Array    | [697](./leetcode697.java)      ||   |
 | Course Schedule    | [207](./leetcode207.java)      || [BFS Topological sort](#bfs-topological-sort)  |
 | Course Schedule II   | [210](./leetcode210.java)      || [BFS Topological sort](#bfs-topological-sort)  |
@@ -20,6 +20,7 @@
 | Split Array into Consecutive Subsequences   | [659](./leetcode659.java)      |:star:|   |
 | Triangle   | [120](./leetcode120.java)      |:star:| [DP](#dp)  |
 | Palindrome Partitioning   | [131](./leetcode131.java)      |:star:|  |
+| Palindrome Partitioning II   | [132](./leetcode132.java)      |:star:|  |
 | Longest Consecutive Sequence   | [128](./leetcode128.java)      ||  |
 | Largest Rectangle in Histogram   | [84](./leetcode84.java)      |:star:| monotonic stack |
 | Next Greater Element I   | [496](./leetcode496.java)      || monotonic stack |
@@ -30,6 +31,7 @@
 | Regular Expression Matching   | [10](./leetcode10.java)      |:star:| [DP](#dp) |
 | Word Break   | [139](./leetcode139.java)      |:star:| |
 | Word Break II   | [140](./leetcode140.java)      |:star:| |
+| Word Break III   | [140's modified](./leetcode140-1.java)     |:star:| |
 
 
 ## Notes
@@ -74,6 +76,23 @@ check some cases such as index out of bound. we always need to initialize some s
 > DP is used to optimize the problem of O(2^n), O(n^n), O(n!) to O(n^2), O(n^3), or O(n^4) (Polynomial). If a problem can already be solved in poly time, then DP cannot be used on such problem.
 
 Another way to handle with DP problem: Brute force or DFS first, and try to add some memoization to optimize it.  
+
+### DP: Def for subproblem
+```java
+dp[i]
+```
+* from index i to tail  
+* from index 0 to i  
+* first i  
+
+```java
+dp[i][j]
+```
+* from index i to j  
+* first i in first sequence and first j in second sequence
+* index i to tail in first sequence and index j to tail in second sequence
+
+> subproblem asks the same question as original (most of all), e.g. how many palindrome can we get? then our subproblem is also getting number of palindrome from substring.
 
 ### Time complexity of some core library functions
 ```java

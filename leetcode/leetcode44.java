@@ -50,3 +50,57 @@ class Solution {
         return dp[str_len][ptr_len];
     }
 }
+
+// DFS + memoization
+// memo[i][j]: s[i~m-1] can be matched by p[j~n-1]
+// ------i-------- s
+// -----j------- p
+// if p[j] = a~z or 0-9, s[i] = p[j] && memo[i+1][j+1]
+// if p[j] = ?, i < s.length && memo[i+1][j+1]
+// if p[j] = *, 
+// method 1: enulmerate matched length 0, 1 to n
+// (clear) method 2:
+// if * means empty string, memo[i][j+1] (i doesn't need to move, j needs to move forward)
+// if * means not empty string, memo[i+1][j] (i has been matched so move forward, j stay still)
+// 這裡的思路關於 * 匹配非空字串的思路很厲害，i 不管怎樣都會繼續向後匹配，j只要待在原地就好，因為下一個還是可以匹配 *
+// beats over 61% of submission
+class Solution {
+    private boolean allStar(String p, int pIndex){
+        // is there only * left
+        for(int i = pIndex; i < p.length(); i++){
+            if(p.charAt(i) != '*') return false;
+        }
+        return true;
+    }
+    
+    private boolean isMatchHelper(String s, int sIndex, String p, int pIndex, boolean[][] memo, boolean[][] visited){
+        // if there is no pattern left, it is matched only if string is also no left
+        if(pIndex == p.length()) return sIndex == s.length();
+        // if there is no string left, p can only be * e.g. (ab, ab*)
+        if(sIndex == s.length()) return allStar(p, pIndex);
+        if(visited[sIndex][pIndex]) return memo[sIndex][pIndex];
+        
+        char sChar = s.charAt(sIndex);
+        char pChar = p.charAt(pIndex);
+        boolean match;
+        
+        if(pChar == '*'){
+            // the most important and interesting part
+            match = isMatchHelper(s, sIndex, p, pIndex+1, memo, visited) || isMatchHelper(s, sIndex+1, p, pIndex, memo, visited);
+        }else{
+            match = (sChar == pChar || pChar == '?') && isMatchHelper(s, sIndex+1, p, pIndex+1, memo, visited);
+        }
+        
+        visited[sIndex][pIndex] = true;
+        memo[sIndex][pIndex] = match;
+        return match;
+    }
+    
+    public boolean isMatch(String s, String p) {
+        if(s == null || p == null) return false;
+        
+        boolean[][] memo = new boolean[s.length()][p.length()];
+        boolean[][] visited = new boolean[s.length()][p.length()];
+        return isMatchHelper(s, 0, p, 0, memo, visited);
+    }
+}
