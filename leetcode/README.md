@@ -1,7 +1,7 @@
 ## Leetcode
 | Problem        | Solution           | Cheat  | Writeup  |
 | ------------- |-------------|-----|-----|
-| Maximum Subarray   | [53](./leetcode53-1.java)      ||   |
+| Maximum Subarray   | [53](./leetcode53.java)      ||   |
 | Edit Distance    | [72](./leetcode72-1.java)      |:star:|   |
 | Longest Increasing Subsequence  | [300](./leetcode300-1.java)      |  |   |
 | Longest Common Subsequence  | [1143](./leetcode1143-1.java)      |:star:|   |
@@ -29,6 +29,7 @@
 | Wildcard Matching   | [44](./leetcode44.java)      |:star:| [DP](#dp) |
 | Regular Expression Matching   | [10](./leetcode10.java)      |:star:| [DP](#dp) |
 | Word Break   | [139](./leetcode139.java)      |:star:| |
+| Word Break II   | [140](./leetcode140.java)      |:star:| |
 
 
 ## Notes
@@ -71,6 +72,8 @@ check some cases such as index out of bound. we always need to initialize some s
 `P(1)`, `P(2)` first or `P(27)`, `P(26)` first? The best way to make sure about order is check formula. When you want to get the result of left side, have you already get the all results of right side?  
 
 > DP is used to optimize the problem of O(2^n), O(n^n), O(n!) to O(n^2), O(n^3), or O(n^4) (Polynomial). If a problem can already be solved in poly time, then DP cannot be used on such problem.
+
+Another way to handle with DP problem: Brute force or DFS first, and try to add some memoization to optimize it.  
 
 ### Time complexity of some core library functions
 ```java
