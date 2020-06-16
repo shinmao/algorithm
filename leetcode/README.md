@@ -32,6 +32,11 @@
 | Word Break   | [139](./leetcode139.java)      |:star:| |
 | Word Break II   | [140](./leetcode140.java)      |:star:| |
 | Word Break III   | [140's modified](./leetcode140-1.java)     |:star:| |
+| Subsets   | [78](./leetcode78.java)     |:star:| [DFS](#dfs) |
+| Subsets II   | [90](./leetcode90.java)     |:star:| [DFS](#dfs) |
+| Permutations   | [46](./leetcode46.java)     |:star:| [DFS](#dfs) |
+| Permutations II  | [47](./leetcode47.java)     |:star:| [DFS](#dfs) |
+| Next Permutation  | [31](./leetcode31.java)     |:star:| |
 
 
 ## Notes
@@ -102,3 +107,41 @@ This takes `O(nlogn)` of time.
 
 ### Default value of data structure
 * The defualt value of boolean array is **false** (in java).
+
+### DFS
+The trick of dfs:  
+```java
+opertaion 1
+dfs()
+operation 2
+```
+operation 2 would be reverse to offset the operation 1.
+
+### Deep copy
+First comes up with a question?  
+```java
+func(x){
+    x = x + 1;
+}
+
+main(){
+    int x = 0;
+    func(x);
+    // x is still 0
+}
+
+func(subset){
+    subset.add(1);
+}
+
+main(){
+    new subset;
+    func(subset);
+    // subset: {1}
+}
+```
+Why? The reason is **the change to the parameter itself**. When we call function, we would always pass the reference. When we use `param = ...`, it would change itself **(we can imagine it creates a new x)**, and the change is only valid in the function. However, `param.func()` won't change itself, so the add operation would also valid while back to main function. So, if we want to change it, we should use `param = ...` to do a deep copy like following:  
+```java
+newSet = new ArrayList<Integer>(subset);
+results.add(newSet);
+```
