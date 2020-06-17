@@ -36,7 +36,8 @@
 | Subsets II   | [90](./leetcode90.java)     |:star:| [DFS](#dfs) |
 | Permutations   | [46](./leetcode46.java)     |:star:| [DFS](#dfs) |
 | Permutations II  | [47](./leetcode47.java)     |:star:| [DFS](#dfs) |
-| Next Permutation  | [31](./leetcode31.java)     |:star:| |
+| Combination Sum  | [39](./leetcode39.java)     || [DFS](#dfs) |
+| Combination Sum II  | [40](./leetcode40.java)     || [DFS](#dfs) |
 
 
 ## Notes
