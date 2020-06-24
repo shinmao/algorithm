@@ -32,12 +32,14 @@
 | Word Break   | [139](./leetcode139.java)      |:star:| |
 | Word Break II   | [140](./leetcode140.java)      |:star:| |
 | Word Break III   | [140's modified](./leetcode140-1.java)     |:star:| |
-| Subsets   | [78](./leetcode78.java)     |:star:| [DFS](#dfs) |
-| Subsets II   | [90](./leetcode90.java)     |:star:| [DFS](#dfs) |
-| Permutations   | [46](./leetcode46.java)     |:star:| [DFS](#dfs) |
-| Permutations II  | [47](./leetcode47.java)     |:star:| [DFS](#dfs) |
+| Subsets   | [78](./leetcode78.java)     || [DFS](#dfs) |
+| Subsets II   | [90](./leetcode90.java)     || [DFS](#dfs) |
+| Permutations   | [46](./leetcode46.java)     || [DFS](#dfs) |
+| Permutations II  | [47](./leetcode47.java)     || [DFS](#dfs) |
 | Combination Sum  | [39](./leetcode39.java)     || [DFS](#dfs) |
 | Combination Sum II  | [40](./leetcode40.java)     || [DFS](#dfs) |
+| N-Queens  | [51](./leetcode51.java)     |:star:| [DFS](#dfs) |
+| N-Queens II  | [52](./leetcode52.java)     |:star:| [DFS](#dfs) |
 
 
 ## Notes
@@ -146,3 +148,8 @@ Why? The reason is **the change to the parameter itself**. When we call function
 newSet = new ArrayList<Integer>(subset);
 results.add(newSet);
 ```
+
+### Bitwise trick
+You can apply bit operation to optimize your time complexity because computer can save the time of converting decimal to binary. For example, applying bit operation is recognized as the most efficient solution for N-Queens on leetcode!  
+* [cxyxiaowu bit operation LC problem](https://www.cxyxiaowu.com/8990.html)  
+* [BitwiseOperators](https://wiki.python.org/moin/BitwiseOperators)
