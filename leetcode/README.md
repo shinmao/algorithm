@@ -38,8 +38,11 @@
 | Permutations II  | [47](./leetcode47.java)     || [DFS](#dfs) |
 | Combination Sum  | [39](./leetcode39.java)     || [DFS](#dfs) |
 | Combination Sum II  | [40](./leetcode40.java)     || [DFS](#dfs) |
-| N-Queens  | [51](./leetcode51.java)     |:star:| [DFS](#dfs) |
-| N-Queens II  | [52](./leetcode52.java)     |:star:| [DFS](#dfs) |
+| N-Queens  | [51](./leetcode51.cpp)     |:star:| [DFS](#dfs) |
+| N-Queens II  | [52](./leetcode52.cpp)     |:star:| [DFS](#dfs) |
+| Number of 1 Bits  | [191](./leetcode191.cpp)     || [Bitwise Trick](#bitwise-trick) |
+| Power of Two  | [231](./leetcode231.cpp)     || [Bitwise Trick](#bitwise-trick) |
+| Counting Bits  | [338](./leetcode338.cpp)     || [Bitwise Trick](#bitwise-trick) |
 
 
 ## Notes
@@ -153,3 +156,6 @@ results.add(newSet);
 You can apply bit operation to optimize your time complexity because computer can save the time of converting decimal to binary. For example, applying bit operation is recognized as the most efficient solution for N-Queens on leetcode!  
 * [cxyxiaowu bit operation LC problem](https://www.cxyxiaowu.com/8990.html)  
 * [BitwiseOperators](https://wiki.python.org/moin/BitwiseOperators)
+
+### C++ `push_back`
+Once confused that we always need to do deep copy in java such like `result.add(new ArrayList<>(list);`; however, we just need to call `push_back(list);` in C++. After I reading the document, I figure out that `push_back` would just add a copied value to the tail of elements. Therefore, we don't need to worry that our operation in future will change the result again!
