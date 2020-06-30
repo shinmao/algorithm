@@ -120,56 +120,46 @@ public:
 };
 
 // idea: change boolean array to bit array
-// java
-// beats over 77% of submission
+// beats over 100% of submission
 class Solution {
-    private List<String> construct(List<Integer> sublist){
-        List<String> result = new LinkedList<>();
-        int len = sublist.size();
-        for(int i = 0; i < len; i++){
-            StringBuilder sb = new StringBuilder();
-            for(int j = 0; j < len; j++){
-                sb.append(j == sublist.get(i) ? "Q" : ".");
-            }
-            result.add(sb.toString());
-        }
-        return result;
-    }
-    
-    private void dfs(int n, 
-                     int row, 
-                     int col, 
-                     int pie, 
-                     int na, 
-                     List<Integer> sublist, 
-                     List<List<String>> result){
+private:
+    void dfs(int n, 
+             int row, 
+             int col, 
+             int pie, 
+             int na, 
+             vector<string>& sublist, 
+             vector<vector<string>>& result){
+        
         if(row >= n){
-            result.add(construct(sublist));
+            result.push_back(sublist);
             return;
         }
         
         for(int pos = 0; pos < n; pos++){
-            int i = row + pos;   // placed pos
-            int j = n - 1 + pos - row;   // placed na
-            // (a>>i) & 1: read the value on ith bit
-            if((( (col>>pos) | (pie>>i) | (na>>j) ) & 1) != 0) continue;
-            // a ^= (1<<i): reverse the ith bit
-            col ^= (1<<pos);
-            pie ^= (1<<i);
-            na ^= (1<<j);
-            sublist.add(pos);
+            int i = row + pos;
+            int j = n - 1 + pos - row;
+            // 0 means seat is still available
+            // if the seat is 1, it means the seat is already be taken
+            if((((col >> pos) | (pie >> i) | (na >> j)) & 1) != 0) continue;
+            col ^= (1 << pos);    // reverse the bit
+            pie ^= (1 << i);
+            na ^= (1 << j);
+            sublist.at(row).at(pos) = 'Q';
             dfs(n, row+1, col, pie, na, sublist, result);
-            col ^= (1<<pos);
-            pie ^= (1<<i);
-            na ^= (1<<j);
-            sublist.remove(sublist.size()-1);
+            col ^= (1 << pos);
+            pie ^= (1 << i);
+            na ^= (1 << j);
+            sublist.at(row).at(pos) = '.';
         }
     }
-    
-    public List<List<String>> solveNQueens(int n) {
-        List<List<String>> result = new LinkedList<>();
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<string> sublist(n, string(n, '.'));
+        vector<vector<string>> result;
         if(n <= 0){
-            result.add(new ArrayList<>());
+            vector<string> s;
+            result.push_back(s);
             return result;
         }
         
@@ -177,11 +167,11 @@ class Solution {
         int pie = 0;
         int na = 0;
         
-        dfs(n, 0, col, pie, na, new ArrayList<>(), result);
+        dfs(n, 0, col, pie, na, sublist, result);
         
         return result;
     }
-}
+};
 
 // idea: 請參考leetcode 52
 // beats over 83% of submission
