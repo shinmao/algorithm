@@ -13,6 +13,7 @@
 | Best Time to Buy and Sell Stock with Transaction Fee   | [714](./leetcode714.java)      || [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#714-best-time-to-buy-and-sell-stock-with-transaction-fee)  |
 | Maximum Product Subarray    | [152](./leetcode152.java)      |:star:|   |
 | Degree of an Array    | [697](./leetcode697.java)      ||   |
+| Binary Tree Level Order Traversal II    | [107](./leetcode107.cpp)      |`BFS`|   |
 | Course Schedule    | [207](./leetcode207.java)      || [BFS Topological sort](#bfs-topological-sort)  |
 | Course Schedule II   | [210](./leetcode210.java)      || [BFS Topological sort](#bfs-topological-sort)  |
 | Course Schedule III   | [630](./leetcode630.java)      |:star:| [Sort in ascending or descending](#sort-in-ascending-order-or-descending-order) |
@@ -38,11 +39,15 @@
 | Permutations II  | [47](./leetcode47.java)     || [DFS](#dfs) |
 | Combination Sum  | [39](./leetcode39.java)     || [DFS](#dfs) |
 | Combination Sum II  | [40](./leetcode40.java)     || [DFS](#dfs) |
-| N-Queens  | [51](./leetcode51.cpp)     |:star:| [DFS](#dfs) |
-| N-Queens II  | [52](./leetcode52.cpp)     |:star:| [DFS](#dfs) |
-| Number of 1 Bits  | [191](./leetcode191.cpp)     || [Bitwise Trick](#bitwise-trick) |
-| Power of Two  | [231](./leetcode231.cpp)     || [Bitwise Trick](#bitwise-trick) |
-| Counting Bits  | [338](./leetcode338.cpp)     || [Bitwise Trick](#bitwise-trick) |
+| N-Queens  | [51](./leetcode51.cpp)     |:star: `DFS`,`Bit`| [wp](https://blog.1pwnch.com/posts/n-queens-on-leetcode/) |
+| N-Queens II  | [52](./leetcode52.cpp)     |:star: `DFS`,`Bit`| [wp](https://blog.1pwnch.com/posts/n-queens-on-leetcode/) |
+| Number of 1 Bits  | [191](./leetcode191.cpp)     |`Bit`| [Bitwise Trick](#bitwise-trick) |
+| Power of Two  | [231](./leetcode231.cpp)     |`Bit`| [Bitwise Trick](#bitwise-trick) |
+| Counting Bits  | [338](./leetcode338.cpp)     |`Bit`| [Bitwise Trick](#bitwise-trick) |
+| Single Number  | [136](./leetcode136.cpp)     |`Bit`| [Bitwise Trick](#bitwise-trick) |
+| Single Number II  | [137](./leetcode137.cpp)     |:star: `Bit`,`truth table`| [Bitwise Trick](#bitwise-trick) |
+| Single Number III  | [260](./leetcode260.cpp)     |:star: `Bit`| [Bitwise Trick](#bitwise-trick) |
+| Prison Cells After N Days  | [957](./leetcode957.cpp)     |:star:| |
 
 
 ## Notes
@@ -106,8 +111,11 @@ dp[i][j]
 > subproblem asks the same question as original (most of all), e.g. how many palindrome can we get? then our subproblem is also getting number of palindrome from substring.
 
 ### Time complexity of some core library functions
-```java
+```
+// java
 Arrays.sort(array);
+// C++
+std::sort(vec.begin(), vec.end());
 ```
 This takes `O(nlogn)` of time.
 
@@ -152,10 +160,13 @@ newSet = new ArrayList<Integer>(subset);
 results.add(newSet);
 ```
 
+### C++ `push_back` v.s. Java `deep copy`
+Once confused that we always need to do deep copy in java such like `result.add(new ArrayList<>(list);`; however, we just need to call `push_back(list);` in C++. After I reading the document, I figure out that `push_back` would just add a copied value to the tail of elements. Therefore, we don't need to worry that our operation in future will change the result again!
+
 ### Bitwise trick
 You can apply bit operation to optimize your time complexity because computer can save the time of converting decimal to binary. For example, applying bit operation is recognized as the most efficient solution for N-Queens on leetcode!  
 * [cxyxiaowu bit operation LC problem](https://www.cxyxiaowu.com/8990.html)  
 * [BitwiseOperators](https://wiki.python.org/moin/BitwiseOperators)
-
-### C++ `push_back`
-Once confused that we always need to do deep copy in java such like `result.add(new ArrayList<>(list);`; however, we just need to call `push_back(list);` in C++. After I reading the document, I figure out that `push_back` would just add a copied value to the tail of elements. Therefore, we don't need to worry that our operation in future will change the result again!
+* [Basics: how to convert negative decimal to binary](https://superuser.com/questions/975684/converting-negative-decimal-to-binary)
+* [Basics: What is Bit Masking?](https://stackoverflow.com/questions/10493411/what-is-bit-masking)
+* [bit operation](https://oi-wiki.org/math/bit/)

@@ -207,7 +207,7 @@ class Solution {
                 int p = available & -available;
                 available ^= p;
                 
-                int col_indexQ = (n-1) - log2(p);
+                int col_indexQ = log2(p);
                 sublist.push_back(col_indexQ);
                 
                 if(row == n-1){
@@ -266,28 +266,28 @@ template <typename T>
 // same beats over 99% of submission
 class Solution {
 private:
-    void dfs(int n, 
-             int row, 
-             int col, 
-             int pie, 
-             int na, 
-             vector<string>& sublist, 
-             vector<vector<string>>& result){
+    void dfs(int n,
+            int row,
+            int col,
+            int pie,
+            int na,
+            vector<string>& sublist,
+            vector<vector<string>>& result){
         
-        int available = ((1 << n) - 1) & ~(col | pie | na);
+        int available = (((1 << n) - 1) & ~(col | pie | na));
         while(available != 0){
             int p = available & -available;
             available ^= p;
             
-            int col_indexQ = (n-1) - log2(p);
+            int col_indexQ = log2(p);
             sublist.at(row).at(col_indexQ) = 'Q';
             
-            if(row == n-1){
+            if(row == n - 1){
                 result.push_back(sublist);
                 sublist.at(row).at(col_indexQ) = '.';
                 return;
             }else{
-                dfs(n, row+1, (col ^ p), (pie ^ p) >> 1, (na ^ p) << 1, sublist, result);
+                dfs(n, row + 1, (col ^ p), (pie ^ p) >> 1, (na ^ p) << 1, sublist, result);
                 sublist.at(row).at(col_indexQ) = '.';
             }
         }
