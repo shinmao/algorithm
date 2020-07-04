@@ -33,10 +33,10 @@
 | Word Break   | [139](./leetcode139.java)      |:star:| |
 | Word Break II   | [140](./leetcode140.java)      |:star:| |
 | Word Break III   | [140's modified](./leetcode140-1.java)     |:star:| |
-| Subsets   | [78](./leetcode78.java)     || [DFS](#dfs) |
-| Subsets II   | [90](./leetcode90.java)     || [DFS](#dfs) |
-| Permutations   | [46](./leetcode46.java)     || [DFS](#dfs) |
-| Permutations II  | [47](./leetcode47.java)     || [DFS](#dfs) |
+| Subsets   | [78](./leetcode78.cpp)     || [DFS](#dfs) |
+| Subsets II   | [90](./leetcode90.cpp)     || [DFS](#dfs) |
+| Permutations   | [46](./leetcode46.cpp)     |:star:| [DFS](#dfs) |
+| Permutations II  | [47](./leetcode47.cpp)     || [DFS](#dfs) |
 | Combination Sum  | [39](./leetcode39.java)     || [DFS](#dfs) |
 | Combination Sum II  | [40](./leetcode40.java)     || [DFS](#dfs) |
 | N-Queens  | [51](./leetcode51.cpp)     |:star: `DFS`,`Bit`| [wp](https://blog.1pwnch.com/posts/n-queens-on-leetcode/) |
