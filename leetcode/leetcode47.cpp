@@ -29,3 +29,49 @@ class Solution {
             return res;
         }
     };
+}
+
+// idea: also use swap idea
+// however, pay attention that we can not pass by reference for nums here
+// because we need sorted array to skip duplicate here
+// but swap will destruct our sorted order
+// therefore, pass by value is the best way here
+// beats over 83% of submission
+class Solution {
+private:
+    void dfs(vector<int> nums, int start, vector<vector<int>>& res){
+        if(start == nums.size() - 1){
+            res.push_back(nums);
+            return;
+        }
+        
+        for(int i = start; i < nums.size(); ++i){
+            if(i != start && nums[i] == nums[start]) continue;
+            swap(nums[start], nums[i]);
+            dfs(nums, start+1, res);
+        }
+    }
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        dfs(nums, 0, res);
+        return res;
+    }
+};
+
+// a hack solution
+// beats over 57% of submission
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        res.push_back(nums);
+        while(next_permutation(nums.begin(), nums.end())){
+            res.push_back(nums);
+        }
+        
+        return res;
+    }
+};

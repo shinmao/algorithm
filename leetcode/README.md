@@ -48,6 +48,7 @@
 | Single Number II  | [137](./leetcode137.cpp)     |:star: `Bit`,`truth table`| [Bitwise Trick](#bitwise-trick) |
 | Single Number III  | [260](./leetcode260.cpp)     |:star: `Bit`| [Bitwise Trick](#bitwise-trick) |
 | Prison Cells After N Days  | [957](./leetcode957.cpp)     |:star:| |
+| Ugly Number II  | [264](./leetcode264.cpp)     |:star:| |
 
 
 ## Notes
