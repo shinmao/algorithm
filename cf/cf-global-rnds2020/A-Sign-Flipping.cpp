@@ -1,5 +1,5 @@
-#include <bits/stdc++.h>
- 
+// 31ms
+#include <bits/stdc++.h> 
 using namespace std;
  
 int main() {

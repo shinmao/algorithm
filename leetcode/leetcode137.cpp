@@ -81,3 +81,23 @@ public:
         return ones;
     }
 };
+
+// extended single number
+// test if you already understand or not
+// most num appear for 4 times, single number appears for 2 times
+// please print out single num
+int main() {
+    vector<int> e = {10,19,10,11,10,19,11,11,10,11};
+    int x = 0, y = 0;
+    for(int i : e){
+        int tmpx = x ^ i;
+        y = (x & (y ^ i)) | (~x & y);
+        x = tmpx;
+    }
+    cout << y << '\n';
+    return 0;
+}
+
+// optimize again
+x ^= i;
+y = (~x & (y ^ i)) | (x & y);
