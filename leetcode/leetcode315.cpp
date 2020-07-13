@@ -1,13 +1,12 @@
-// beats over 36% of submission
+// beats over 59% of submission
 class Solution {
 private:
-    vector<int> input;
     vector<int> count;
     struct Node {
         int id;
         int val;
         int s;
-        int ls;    // whole num smaller than cur node
+        int ls;
         unique_ptr<Node> left;
         unique_ptr<Node> right;
         Node(int id_, int val_, int s_): id(id_), val(val_), s(s_), ls(0), left(nullptr), right(nullptr) {}
@@ -38,15 +37,13 @@ private:
 public:
     vector<int> countSmaller(vector<int>& nums) {
         if(nums.empty()) return {};
-        reverse(nums.begin(), nums.end());
-        input.assign(nums.begin(), nums.end());
-        count.assign(input.size(), 0);
+        [](){ios::sync_with_stdio(false);cin.tie(0);return 0;}();
+        count.assign(nums.size(), 0);
         // add root node
-        _root = make_unique<Node>(0, input[0], 0);
-        for(int i = 1; i < input.size(); ++i) {
-            add(_root.get(), i, input[i]);
+        _root = make_unique<Node>(nums.size() - 1, nums[nums.size() - 1], 0);
+        for(int i = nums.size()-2; i > -1; --i) {
+            add(_root.get(), i, nums[i]);
         }
-        reverse(count.begin(), count.end());
         return count;
     }
 };
