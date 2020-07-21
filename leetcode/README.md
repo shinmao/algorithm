@@ -49,10 +49,10 @@
 | Single Number III  | [260](./leetcode260.cpp)     |:star: `Bit`| [Bitwise Trick](#bitwise-trick) |
 | Prison Cells After N Days  | [957](./leetcode957.cpp)     |:star:| |
 | Ugly Number II  | [264](./leetcode264.cpp)   |:star:| |
-| Range Sum Query - Mutable  | [307](./leetcode307.cpp)   |:star: `Binary Indexed Tree`|  |
+| Range Sum Query - Mutable  | [307](./leetcode307.cpp)   |:star: `Binary Indexed Tree`,`Segment Tree`|  |
 | Binary Search Tree Iterator  | [173](./leetcode173.cpp)   |:star: `stack`|  |
 | My Calendar III  | [732](./leetcode732.cpp)   |:star: `map`,`Segment Tree`|  |
-| Count of Smaller Numbers After Self  | [315](./leetcode315.cpp)   |:star: `BST`|  |
+| Count of Smaller Numbers After Self  | [315](./leetcode315.cpp)   |:star: `BST`| [wp](https://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/) |
 
 
 ## Notes
