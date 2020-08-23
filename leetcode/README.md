@@ -1,16 +1,17 @@
 ## Leetcode
 | Problem        | Solution           | Cheat  | Writeup  |
 | ------------- |-------------|-----|-----|
+| Longest Palindromic Substring   | [5](./leetcode5.cpp)      |`dp`|   |
 | Maximum Subarray   | [53](./leetcode53.java)      ||   |
 | Edit Distance    | [72](./leetcode72.java)      |:star:|   |
 | Longest Increasing Subsequence  | [300](./leetcode300.java)      |  |   |
 | Longest Common Subsequence  | [1143](./leetcode1143.java)      |:star:|   |
 | Longest Palindrome Subsequence    | [516](./leetcode516.java)      |:star:|   |
-| Best Time to Buy and Sell Stock    | [121](./leetcode121.java)      |:star:| [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#121-best-time-to-buy-and-sell-stock)  |
-| Best Time to Buy and Sell Stock III   | [123](./leetcode123.java)      |:star:| [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#123-best-time-to-buy-and-sell-stock-iii)  |
-| Best Time to Buy and Sell Stock IV   | [188](./leetcode188.java)      || [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#188-best-time-to-buy-and-sell-stock-iv)  |
-| Best Time to Buy and Sell Stock with Cooldown   | [309](./leetcode309.java)      |:star:| [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#309-best-time-to-buy-and-sell-stock-with-cooldown)  |
-| Best Time to Buy and Sell Stock with Transaction Fee   | [714](./leetcode714.java)      || [wp](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#714-best-time-to-buy-and-sell-stock-with-transaction-fee)  |
+| Best Time to Buy and Sell Stock    | [121](./leetcode121.java)      |:star:| [blog](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#121-best-time-to-buy-and-sell-stock)  |
+| Best Time to Buy and Sell Stock III   | [123](./leetcode123.java)      |:star:| [blog](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#123-best-time-to-buy-and-sell-stock-iii)  |
+| Best Time to Buy and Sell Stock IV   | [188](./leetcode188.java)      || [blog](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#188-best-time-to-buy-and-sell-stock-iv)  |
+| Best Time to Buy and Sell Stock with Cooldown   | [309](./leetcode309.java)      |:star:| [blog](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#309-best-time-to-buy-and-sell-stock-with-cooldown)  |
+| Best Time to Buy and Sell Stock with Transaction Fee   | [714](./leetcode714.java)      || [blog](https://blog.1pwnch.com/posts/stock-problem-on-leetcode/#714-best-time-to-buy-and-sell-stock-with-transaction-fee)  |
 | Maximum Product Subarray    | [152](./leetcode152.java)      |:star:|   |
 | Degree of an Array    | [697](./leetcode697.java)      ||   |
 | Binary Tree Level Order Traversal II    | [107](./leetcode107.cpp)      |`BFS`|   |
@@ -39,8 +40,8 @@
 | Permutations II  | [47](./leetcode47.cpp)     || [DFS](#dfs) |
 | Combination Sum  | [39](./leetcode39.java)     || [DFS](#dfs) |
 | Combination Sum II  | [40](./leetcode40.java)     || [DFS](#dfs) |
-| N-Queens  | [51](./leetcode51.cpp)     |:star: `DFS`,`Bit`| [wp](https://blog.1pwnch.com/posts/n-queens-on-leetcode/) |
-| N-Queens II  | [52](./leetcode52.cpp)     |:star: `DFS`,`Bit`| [wp](https://blog.1pwnch.com/posts/n-queens-on-leetcode/) |
+| N-Queens  | [51](./leetcode51.cpp)     |:star: `DFS`,`Bit`| [blog](https://blog.1pwnch.com/posts/n-queens-on-leetcode/) |
+| N-Queens II  | [52](./leetcode52.cpp)     |:star: `DFS`,`Bit`| [blog](https://blog.1pwnch.com/posts/n-queens-on-leetcode/) |
 | Number of 1 Bits  | [191](./leetcode191.cpp)     |`Bit`| [Bitwise Trick](#bitwise-trick) |
 | Power of Two  | [231](./leetcode231.cpp)     |`Bit`| [Bitwise Trick](#bitwise-trick) |
 | Counting Bits  | [338](./leetcode338.cpp)     |`Bit`| [Bitwise Trick](#bitwise-trick) |
@@ -52,8 +53,15 @@
 | Range Sum Query - Mutable  | [307](./leetcode307.cpp)   |:star: `Binary Indexed Tree`,`Segment Tree`|  |
 | Binary Search Tree Iterator  | [173](./leetcode173.cpp)   |:star: `stack`|  |
 | My Calendar III  | [732](./leetcode732.cpp)   |:star: `map`,`Segment Tree`|  |
-| Count of Smaller Numbers After Self  | [315](./leetcode315.cpp)   |:star: `BST`| [wp](https://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/) |
-
+| Count of Smaller Numbers After Self  | [315](./leetcode315.cpp)   |:star: `BST`| [blog](https://blog.1pwnch.com/posts/count-of-smaller-nums-after-self/) |
+| Binary Search  | [704](./leetcode704.cpp)   |`Binary Search`|  |
+| Search in Rotated Sorted Array  | [33](./leetcode33.cpp)   |`Binary Search`|  |
+| First Bad Version  | [278](./leetcode278.cpp)   |`Binary Search`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
+| Find Peak Element  | [162](./leetcode162.cpp)   |`Binary Search`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
+| Find Minimum in Rotated Sorted Array  | [153](./leetcode153.cpp)   |`Binary Search`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
+| Find First and Last Position of Element in Sorted Array  | [34](./leetcode34.cpp)   |:star: `Binary Search`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
+| Find K Closest Elements  | [658](./leetcode658.cpp)   |:star: `Binary Search`,`Sliding Window`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
+| Search in a Sorted Array of Unknown Size  | [702](./leetcode702.cpp)   |`Binary Search`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
 
 ## Notes
 ### BFS Topological sort
