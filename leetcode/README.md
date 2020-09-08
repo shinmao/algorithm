@@ -62,35 +62,68 @@
 | Find First and Last Position of Element in Sorted Array  | [34](./leetcode34.cpp)   |:star: `Binary Search`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
 | Find K Closest Elements  | [658](./leetcode658.cpp)   |:star: `Binary Search`,`Sliding Window`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
 | Search in a Sorted Array of Unknown Size  | [702](./leetcode702.cpp)   |`Binary Search`| [blog](https://blog.1pwnch.com/posts/explore-binary-search/) |
+| Most Visited Sector in a Circular Track  | [1560](./leetcode1560.cpp)   | |  |
+| Two Sum IV - Input is a BST  | [653](./leetcode653.cpp)   |:star: `DFS`,`BST` |  |
+| Search a 2D Matrix II  | [240](./leetcode240.cpp)   |:star: |  |
+| Detect Pattern of Length M Repeated K or More Times  | [1566](./leetcode1566.cpp)   |:star: |  |
 
-## Notes
-### BFS Topological sort
-Topological is used on the directed acyclic graph, seriously follow the order of **dependance**. We also can use it to check the cycle: If cycle exists, topological sort won't success, which means that we can not traverse all nodes.
+## 解題思維
+### 遞迴
+遞迴通常會在`return`裏又回call一次function。遞迴是用來**間接**告訴你答案的，而非直接的。某一層做的事都是一樣的，所以我們只要管好自己這層的工作就好。另外遞迴一定會有終止條件(類似在開頭寫個`if() return`之類的)。    
+1. 分治法
+2. 以遞迴來窮舉(也就是後來的dfs，用於traverse)
+3. 又稱作tree search algorithm，以樹狀圖展開所有組合，取代brute force
 
-### Sort in ascending order or descending order
-For sorting method in core library  
-For Array:  
-```java
-Arrays.sort(array, comparator);
-```  
-For List:  
-```java
-Collections.sort(list, comparator);
-```  
-For priority queue:  
-```java
-PriorityQueue<E> queue = new PriorityQueue<>(comparator);
-```  
-comparator in ascending order:  
-```java
-(a, b) -> a - b
-```  
-comparator in descending order:  
-```java
-(a, b) -> b - a
+1. 定義好function
+2. 分解每一層的工作
+3. 找到停止條件
+
+> 面試的時候還是主動問一下能不能用recursion，通常是可以的！
+
+### Binary search
+:star: 跳躍法  
+```cpp
+int cur = start;
+for(int jump = (end - start) / 2; jump > 0; jump /= 2) {
+    while(cur + jump < end && arr[cur + jump] < target) cur += jump;
+}
 ```
+我喜歡把這個寫法叫做rabbit jump。這個寫法找到的是**最後一個小於target的位置**！rabbit從最左邊開始跳，一開始就選最大步，跳到正中間！接下來就是關鍵：我不會馬上換成小步，我會以一樣大的步伐在測看看會不會越界，或者會不會超過target。這也是為什麼內層是用**while而不是if**，用while來最有效率的運用我們最大跨步！注意迴圈的終止條件是當我們接下來的再跳的地方會大於或等於target，所以我們這個rabbit jump找的是最後一個小於target的位置，當然你可以依需求更改條件。  
+這是迥然於我們平常用的binary search，我們常常會用左界和右界來限定search space [之前整理的一篇關於binary search的文章](https://blog.1pwnch.com/posts/explore-binary-search/)，唯一要注意的是：這個寫法我們要先確定 `arr[start] < target`，否則最後的結果會錯！
 
-### DP
+> 如果單純只是想找目標然後又想要偷懶的話(譬如比賽的時候): 建議用lower_bound(iterator, iterator, x)，會回傳第一個 >= x 的位置，時間複雜度也是O(logn)。要注意：如果所有元素都 < x 的話，則會回傳 .end()的位置，是越界的！ 順道提一下upper_bound回傳的則是 > x 的位置。
+
+### Prefix sum 前綴和
+* [leetcode 238](./leetcode238.cpp)
+* [leetcode 560 + 變形題目](./leetcode560.cpp)
+* [leetcode 209 + 雙指針](./leetcode209.cpp)
+* [leetcode 862 + 單調棧](./leetcode862.cpp)
+* [leetcode 644 + binary search](./leetcode644.cpp)
+很重要的一點：我們應該focus在prefix而非在sum。除了sum之外也可以計算product，甚至紀錄min, max。  
+```cpp
+prefix_sum[i] = prefix_sum[i - 1] + arr[i];
+```
+常常用來求**區間**和，我可能還有雙指針和線段樹的選擇。不過切記線段樹不會那麼容易出現。
+
+另外除了上面的式子，一定要記得定義邊界上的值。e.g. 上面當i等於0時就越界了。  
+最好把**前0個元素prefix sum就是0**的想法寫進實現中。 e.g. 推薦創建`size() + 1`的陣列，然後從0開始，可以省掉很多麻煩...  
+
+> 通常我們會想用O(n^2)去枚舉所有的區間，可是其實O(n^2)還不足以算出區間和，因為列舉出區間[i, j]之後，要把i,j之間的的數字加起來要另外O(n)的時間複雜度...
+
+外面先用一層迴圈把`[0]`到`[i]`的`prefix sum`計算好，如果不想另外開空間也可以直接把結果存在輸入的array上。然後想要做`[0~1]`，`[0~2]`...`[0~n-1]`的判斷的話通常也會在這層迴圈就同時完成。
+再來裡面都是處理**非從0開始**的subarray了。`prefix_sum`就可以幫我們把裡面的`O(n)`簡化成`O(1)`：  
+```cpp
+prefix[right] - prefix[left - i] = sum;
+// prefix_sum - prefix_sum' = interval sum
+```
+這個`[left, right]`則是總和為sum的區間。換句話說，我只要拿兩個`prefix_sum`相減，就可以去看某個區間和囉！  
+
+> subarray相關解有很大概率可以用prefix sum解
+
+### BFS 拓墣排序
+拓墣 用於有向無環圖，我們可以用它來判斷圖裡有沒有環，如果有那traverse也會失敗。拓墣排序還常拿來判斷兩個點之間有沒有路線，但這樣用 disjoint set 更快更簡潔。
+
+### 動態規劃
 1. make sure problem state  
 we usually create an array for DP, we should make sure what each elements represents for first, which is also mean make sure problem state.  
 First, **the state before the last step**. Take coins problem to get minimum number of coins for example, we want the sum of coins to be 27, then the state before the last step should be **(27 - ak)** if our coins are a1, a2, ...ak, ai can be 2 or 5.  
@@ -106,7 +139,7 @@ check some cases such as index out of bound. we always need to initialize some s
 
 Another way to handle with DP problem: Brute force or DFS first, and try to add some memoization to optimize it.  
 
-### DP: Def for subproblem
+### 動態規劃：子問題的定義
 ```java
 dp[i]
 ```
@@ -123,20 +156,8 @@ dp[i][j]
 
 > subproblem asks the same question as original (most of all), e.g. how many palindrome can we get? then our subproblem is also getting number of palindrome from substring.
 
-### Time complexity of some core library functions
-```
-// java
-Arrays.sort(array);
-// C++
-std::sort(vec.begin(), vec.end());
-```
-This takes `O(nlogn)` of time.
-
-### Default value of data structure
-* The defualt value of boolean array is **false** (in java).
-
 ### DFS
-The trick of dfs:  
+dfs竅門:  
 ```java
 opertaion 1
 dfs()
@@ -144,39 +165,10 @@ operation 2
 ```
 operation 2 would be reverse to offset the operation 1.
 
-### Deep copy
-First comes up with a question?  
-```java
-func(x){
-    x = x + 1;
-}
-
-main(){
-    int x = 0;
-    func(x);
-    // x is still 0
-}
-
-func(subset){
-    subset.add(1);
-}
-
-main(){
-    new subset;
-    func(subset);
-    // subset: {1}
-}
-```
-Why? The reason is **the change to the parameter itself**. When we call function, we would always pass the reference. When we use `param = ...`, it would change itself **(we can imagine it creates a new x)**, and the change is only valid in the function. However, `param.func()` won't change itself, so the add operation would also valid while back to main function. So, if we want to change it, we should use `param = ...` to do a deep copy like following:  
-```java
-newSet = new ArrayList<Integer>(subset);
-results.add(newSet);
-```
-
 ### C++ `push_back` v.s. Java `deep copy`
 Once confused that we always need to do deep copy in java such like `result.add(new ArrayList<>(list);`; however, we just need to call `push_back(list);` in C++. After I reading the document, I figure out that `push_back` would just add a copied value to the tail of elements. Therefore, we don't need to worry that our operation in future will change the result again!
 
-### Bitwise trick
+### 位運算技巧
 You can apply bit operation to optimize your time complexity because computer can save the time of converting decimal to binary. For example, applying bit operation is recognized as the most efficient solution for N-Queens on leetcode!  
 * [cxyxiaowu bit operation LC problem](https://www.cxyxiaowu.com/8990.html)  
 * [BitwiseOperators](https://wiki.python.org/moin/BitwiseOperators)
