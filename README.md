@@ -47,6 +47,7 @@ for(int jump = (end - start) / 2; jump > 0; jump /= 2) {
 * [leetcode 862 + 單調棧](./leetcode/leetcode862.cpp)
 * [leetcode 644 + binary search](./leetcode/leetcode644.cpp)
 * [lintcode 1840 + 二維思想](./lintcode/lintcode1840.cpp)
+* [zoj a694 關於二維思想](./zoj/a694.cpp)
 很重要的一點：我們應該focus在prefix而非在sum。除了sum之外也可以計算product，甚至紀錄min, max。  
 ```cpp
 prefix_sum[i] = prefix_sum[i - 1] + arr[i];
@@ -75,6 +76,14 @@ prefix[right] - prefix[left - i] = sum;
 * [leetcode 76](./leetcode/leetcode76.cpp)
 * [leetcode 475(比較不明顯的雙指針)](./leetcode/leetcode475.cpp)
 * [lintcode 194](./lintcode/lintcode194.cpp)
+
+### 滑動窗口 sliding window
+* [lintcode1849 經典題](./lintcode/lintcode1849.cpp)
+* [lintcode1850 隔板法](./lintcode/lintcode1850.cpp)
+
+sliding window通常會先用`O(window-size)`算出初始化的window sum。接下來每往右移一步都只需要考慮最左邊和最右邊的變化就好！  
+
+上面sliding window中有一種配合隔板法的變化題，通常會在同一個數組要求兩個不重合區間的最優解(interval sum之類的)。我們可以列舉隔板將數組分裂成兩塊，那就變成在兩塊中個別求sliding window。目前用起來雖然時間複雜度不是最好，但是思路最清晰！
 
 ### BFS 拓墣排序
 拓墣 用於有向無環圖，我們可以用它來判斷圖裡有沒有環，如果有那traverse也會失敗。拓墣排序還常拿來判斷兩個點之間有沒有路線，但這樣用 disjoint set 更快更簡潔。
