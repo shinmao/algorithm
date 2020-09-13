@@ -4,6 +4,7 @@
 // 把左邊指針固定在當前可容許的最大視窗 起點
 // 一邊檢查總和有沒有 >= s
 // 一邊把窗口縮小
+// 時間複雜度 O(n)：因為每個元素頂多被訪問兩次
 int minSubArrayLen(int s, vector<int>& nums) {
     if(nums.size() == 0) return 0;
     int cursum = 0, len = nums.size() + 1, left = 0;
