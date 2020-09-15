@@ -90,6 +90,8 @@ sliding window通常會先用`O(window-size)`算出初始化的window sum。接�
 ### BFS
 * [...leetcode 200 traverse](./leetcode/leetcode200.cpp)
 * [lintcode 630 shortest path](./lintcode/lintcode630.cpp)
+* [leetcode 269 經典topo題](./leetcode/leetcode269.cpp)
+* [lintcode 1364 傳送門](./lintcode/lintcode1364.cpp)
 
 queue：先進先出
 
@@ -130,7 +132,7 @@ while(...) {
 }
 ```
 :star: 注意！必須在點入queue的時候就加入visited！如果我們在點出queue的時候才加入visited，這樣會導致相同的點入queue！  
-:star: 對當前點的處理，一定要在出queue的時候。入queue的時候就只有check valid和update visited和distance！  
+:star: 對當前點的處理，一定要在出queue的時候。入queue的時候就只有**check valid**和**update visited**和distance！  
 
 拓墣 用於有向無環圖，我們可以用它來判斷圖裡有沒有環，如果有那traverse也會失敗。拓墣排序還常拿來判斷兩個點之間有沒有路線，但這樣用 disjoint set 更快更簡潔。  
 1. 統計所有點的in-degree
@@ -177,8 +179,22 @@ return node;
 
 > 靜態圖用BFS，實時修改的圖用union find  
 
+> 萬一在找出最短路徑後，他又叫我們輸出最短路徑，我們可以用資料結構去存每個node的parent node e.g. last_point[node2] = node1。這邊注意一下，我們不會去存下一個node，因為每個node的下一個node可以有幾種選擇，但是上一個node通常只有一個選擇！
+
 ### 並查集Union find
 * [leetcode 721 經典必練題](./leetcode/leetcode721.cpp)
+
+### DFS
+* [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
+
+
+dfs竅門:  
+```java
+opertaion 1
+dfs()
+operation 2
+```
+operation 2 would be reverse to offset the operation 1.
 
 ### 動態規劃
 1. make sure problem state  
@@ -212,15 +228,6 @@ dp[i][j]
 * index i to tail in first sequence and index j to tail in second sequence
 
 > subproblem asks the same question as original (most of all), e.g. how many palindrome can we get? then our subproblem is also getting number of palindrome from substring.
-
-### DFS
-dfs竅門:  
-```java
-opertaion 1
-dfs()
-operation 2
-```
-operation 2 would be reverse to offset the operation 1.
 
 ### C++ `push_back` v.s. Java `deep copy`
 Once confused that we always need to do deep copy in java such like `result.add(new ArrayList<>(list);`; however, we just need to call `push_back(list);` in C++. After I reading the document, I figure out that `push_back` would just add a copied value to the tail of elements. Therefore, we don't need to worry that our operation in future will change the result again!
