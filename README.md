@@ -190,6 +190,7 @@ return node;
 ### DFS
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
 * [leetcode 124 binary tree max path sum](./leetcode/leetcode124.cpp)
+* [lintcode 262 heir tree](./lintcode/lintcode262.cpp)
 
 在經典問題subset/permutation中，有兩種實現方式：一是在每一層選擇加/不加，二則是backtrack。Backtrack的方式非常適合用來做排列。  
 第一種方式的話，要加入dfs出口條件：當(加/不加)決定通過了最後一個元素，就可以打包行李走人囉！  
@@ -220,22 +221,27 @@ operation 2 必須把 operation 1 的影響還原回來
 > 如果還是爆棧了，唉還是用看看BFS唄
 
 ### 動態規劃
+* [leetcode 256](./leetcode/leetcode256.cpp)
+* [leetcode 416 背包問題](./leetcode/leetcode416.cpp)
 * [leetcode 337 樹上dp](./leetcode/leetcode337.cpp)
 
-1. make sure problem state  
-we usually create an array for DP, we should make sure what each elements represents for first, which is also mean make sure problem state.  
-First, **the state before the last step**. Take coins problem to get minimum number of coins for example, we want the sum of coins to be 27, then the state before the last step should be **(27 - ak)** if our coins are a1, a2, ...ak, ai can be 2 or 5.  
-Second, **define subproblem**. So, what is the minimum number of coins whose sum is (27 - ak)? This is a subproblem. Now, we can **find the relationship between subproblem and original problem**. ak should be 2 or 5, so `P(27) = P(27 - 2) + 1` or `P(27) = P(27 - 5) + 1`.  
-2. formulate problem transition  
-problem transition can be interpreted as problem relationship, and **remember don't be confused by other states, only consider the two states**. we have found relationship between subproblem and original problem. it can be formulated as `P(x) = min(P(x-2) + 1, P(x-5) + 1)`.  
-3. follow actual logic to set initial condition and boundary  
-check some cases such as index out of bound. we always need to initialize some state by hands, e.g. `P(0) = 0`.  
-4. make sure the order of calculation  
-`P(1)`, `P(2)` first or `P(27)`, `P(26)` first? The best way to make sure about order is check formula. When you want to get the result of left side, have you already get the all results of right side?  
+* 子問題 而且 只解決一次
+* 子問題的答案用資料結構存起來
 
-> DP is used to optimize the problem of O(2^n), O(n^n), O(n!) to O(n^2), O(n^3), or O(n^4) (Polynomial). If a problem can already be solved in poly time, then DP cannot be used on such problem.
+1. 確定狀態：可以從最後一步，最後的答案推測  
+第n個的話，他跟n-1的關係是啥？  
+2. 子問題
+3. 轉移方程：要注意初始條件和邊界
 
-Another way to handle with DP problem: Brute force or DFS first, and try to add some memoization to optimize it.  
+背包問題：  
+背包大小為m，我行李中有些東西想放進去，有沒有機會塞滿滿？  
+思路：  
+可以塞滿代表(n - 1)個東西時就能塞滿或是n個東西剛好能塞滿？  
+背包問題有很高的機會可以加以優化呦！  
+
+> DP是用來將指數時間和階層時間的問題優化成O(n^2), O(n^3)的。如果問題本來就可以在更短的時間內解決，那代表dp是不適用的方法
+> DP空間常常可以優化，如果發現之前的資訊其實不需要了，可以用變數來代替就好
+
 
 ### 動態規劃：子問題的定義
 ```java
@@ -254,11 +260,8 @@ dp[i][j]
 
 > subproblem asks the same question as original (most of all), e.g. how many palindrome can we get? then our subproblem is also getting number of palindrome from substring.
 
-### C++ `push_back` v.s. Java `deep copy`
-Once confused that we always need to do deep copy in java such like `result.add(new ArrayList<>(list);`; however, we just need to call `push_back(list);` in C++. After I reading the document, I figure out that `push_back` would just add a copied value to the tail of elements. Therefore, we don't need to worry that our operation in future will change the result again!
-
 ### 位運算技巧
-You can apply bit operation to optimize your time complexity because computer can save the time of converting decimal to binary. For example, applying bit operation is recognized as the most efficient solution for N-Queens on leetcode!  
+可以用位運算來加速時間複雜度因為電腦對十進位數字進行運算還要另外轉換成二進位。像是N-Queen公認最快的解法便是位運算的！  
 * [cxyxiaowu bit operation LC problem](https://www.cxyxiaowu.com/8990.html)  
 * [BitwiseOperators](https://wiki.python.org/moin/BitwiseOperators)
 * [Basics: how to convert negative decimal to binary](https://superuser.com/questions/975684/converting-negative-decimal-to-binary)
