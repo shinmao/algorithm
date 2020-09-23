@@ -28,6 +28,43 @@
 * [leetcode 33](./leetcode/leetcode33.cpp)
 * [lintcode 438](./lintcode/lintcode438.cpp)
 
+三種模版了解一下：  
+```cpp
+// I.
+while(start <= end) {
+    if(nums[mid] == target)
+        return mid;
+    else if(nums[mid] > target)
+        end = mid - 1;
+    else
+        start = mid + 1;
+}
+// II.
+while(start < end) {
+    if(nums[mid] == target)
+        return mid;
+    if(nums[mid] < target)
+        start = mid + 1;
+    else
+        end = mid;
+}
+if(start != num.size() && nums[start] == target)
+    return start;
+// III.
+while(start + 1 < end) {
+    if(nums[mid] == target)
+        return mid;\
+    if(nums[mid] < target)
+        start = mid;
+    else
+        end = mid;
+}
+if(nums[start] == target)
+    return start;
+if(nums[end] == target)
+    return end;
+```
+
 :star: 跳躍法  
 ```cpp
 int cur = start;
@@ -78,6 +115,9 @@ prefix[right] - prefix[left - i] = sum;
 * [leetcode 76](./leetcode/leetcode76.cpp)
 * [leetcode 475(比較不明顯的雙指針)](./leetcode/leetcode475.cpp)
 * [lintcode 194](./lintcode/lintcode194.cpp)
+* [lintcode 404 三指針](./lintcode/lintcode404.cpp)
+* [lintcode 1879 看似沒有單調性的變態](./lintcode/lintcode1879.cpp)
+* [lintcode 390](./lintcode/lintcode390.cpp)
 
 ### 滑動窗口 sliding window
 * [lintcode1849 經典題](./lintcode/lintcode1849.cpp)
@@ -223,7 +263,11 @@ operation 2 必須把 operation 1 的影響還原回來
 ### 動態規劃
 * [leetcode 256](./leetcode/leetcode256.cpp)
 * [leetcode 416 背包問題](./leetcode/leetcode416.cpp)
-* [leetcode 337 樹上dp](./leetcode/leetcode337.cpp)
+
+雖然用數組先把答案存起來像dp，但沒有順序性，單存由dfs traverse的memoi類型：  
+* [leetcode 337 樹上dp](./leetcode/leetcode337.cpp)  
+* [正則...]()  
+* [word break...]()
 
 * 子問題 而且 只解決一次
 * 子問題的答案用資料結構存起來
