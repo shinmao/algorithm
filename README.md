@@ -264,6 +264,15 @@ operation 2 必須把 operation 1 的影響還原回來
 * [leetcode 256](./leetcode/leetcode256.cpp)
 * [leetcode 416 背包問題](./leetcode/leetcode416.cpp)
 
+區間型dp要注意：  
+把區間分割後如果用枚舉的來求解，可能後區間的答案前面還沒算過  
+可以用長度之類有順序性的方式來枚舉  
+(不過其實區間型的目前大概就stone game和burst balloon而已...)  
+* [lintcode 476/593 stone game](./lintcode/lintcode476-593.cpp)  
+
+> 區間型dp最有名的優化方式：用四邊形不等式優化枚舉切割點的時間
+
+
 雖然用數組先把答案存起來像dp，但沒有順序性，單存由dfs traverse的memoi類型：  
 * [leetcode 337 樹上dp](./leetcode/leetcode337.cpp)  
 * [正則...]()  
