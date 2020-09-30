@@ -224,9 +224,6 @@ return node;
 
 > 感覺topo幾乎用在不知道起點是哪裡，想要透過neighbor的關係理出整張圖的路線。而bfs用在已經知道起點在哪，求到終點的最短路線...etc。
 
-### 並查集Union find
-* [leetcode 721 經典必練題](./leetcode/leetcode721.cpp)
-
 ### DFS
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
 * [leetcode 124 binary tree max path sum](./leetcode/leetcode124.cpp)
@@ -258,6 +255,7 @@ operation 2
 operation 2 必須把 operation 1 的影響還原回來  
 
 > 一般求所有方案的題目可以往dfs方向想
+
 > 如果還是爆棧了，唉還是用看看BFS唄
 
 ### 動態規劃
@@ -276,10 +274,11 @@ operation 2 必須把 operation 1 的影響還原回來
 雖然用數組先把答案存起來像dp，但沒有順序性，單存由dfs traverse的memoi類型：  
 * [leetcode 337 樹上dp](./leetcode/leetcode337.cpp)  
 * [正則...]()  
-* [word break...]()
+* [word break...]()   
 
-* 子問題 而且 只解決一次
-* 子問題的答案用資料結構存起來
+
+-> 子問題 而且 只解決一次  
+-> 子問題的答案用資料結構存起來
 
 1. 確定狀態：可以從最後一步，最後的答案推測  
 第n個的話，他跟n-1的關係是啥？  
@@ -293,25 +292,57 @@ operation 2 必須把 operation 1 的影響還原回來
 背包問題有很高的機會可以加以優化呦！  
 
 > DP是用來將指數時間和階層時間的問題優化成O(n^2), O(n^3)的。如果問題本來就可以在更短的時間內解決，那代表dp是不適用的方法
+
 > DP空間常常可以優化，如果發現之前的資訊其實不需要了，可以用變數來代替就好
 
+### 並查集Union find
+* [leetcode 261](./leetcode/leetcode261.cpp)  
+* [leetcode 547](./leetcode/leetcode547.cpp)
+* [leetcode 721 經典必練題](./leetcode/leetcode721.cpp)
 
-### 動態規劃：子問題的定義
-```java
-dp[i]
+其實union find的模板很固定：  
+```cpp
+private:
+    vector<int> father;
+    int count;
+    int find(int x) {
+        if(father[x] == x)
+            return x;
+        // path compression
+        return father[x] = find(father[x]);
+    }
+    
+    void connect(int x, int y) {
+        int fx = find(x);
+        int fy = find(y);
+        if(fx != fy) {
+            father[fx] = fy;
+            count--;
+        }
+    }
 ```
-* from index i to tail  
-* from index 0 to i  
-* first i  
+這裏先創一個`father`數組，裡面維護的是每一個node的father  
+另外維護了一個count作為連通塊的數量  
+`find(路徑壓縮)`: 上面的find用於尋找最上面的祖先。路徑壓縮非常有用，會把x到root路徑上所有的點直接改成`x->root`。這樣的優點是若原本很長的鏈`x->y->z....->root`，會被我們壓縮成`x->root`/`y->root`/`z->root`。查詢的時間複雜度由`O(n)`壓縮成`O(1)`。  
+`connect(連結點)`:都**先找到最上面的祖先**，把他們串在一起。每一次merge會讓連通塊的數量減1。  
 
-```java
-dp[i][j]
-```
-* from index i to j  
-* first i in first sequence and first j in second sequence
-* index i to tail in first sequence and index j to tail in second sequence
+> 注意father[]一開始初始化可以為自己，也可以為null。差別在於find中loop的終止條件不一樣！
 
-> subproblem asks the same question as original (most of all), e.g. how many palindrome can we get? then our subproblem is also getting number of palindrome from substring.
+> 題目的node若為數字那我們用vector<int>存就好。如果是str之類型態，我們換成hashmap就好。
+
+> union find可以應用於MST的生成。union find的connect不會導致circle，因為他會先透過find查詢兩個點是否已經在同一個集合。
+
+### MST
+MST就是最小的connected graph，一個可以到所有的點的子圖。minimum則是路徑cost的最小總和。因此MST可能不是唯一的！  
+
+Kruskal演算法流程：  
+1. 先按照cost將所有edges由小排到大
+2. 把所有的edge拆掉只剩下nodes。按照之前排序的順序放上圖，如果出現環就不加入edge，若否，則connect後更新cost sum
+3. iterate一遍後，檢查是否為n-1個邊。畢竟樹就是n-1條邊。
+
+> Kruskal很適合sparse graph，因為前面需要對所有edge排序。
+
+> 上面的node連結直接用union find實現即可。因為union find的connect不會導致circle
 
 ### 位運算技巧
 可以用位運算來加速時間複雜度因為電腦對十進位數字進行運算還要另外轉換成二進位。像是N-Queen公認最快的解法便是位運算的！  
