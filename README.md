@@ -110,6 +110,8 @@ prefix[right] - prefix[left - i] = sum;
 > subarray相關解有很大概率可以用prefix sum解
 
 ### 雙指針
+-> 同向雙指針  
+* [lintcode 1375](./lintcode/lintcode1375.cpp)  
 * [leetcode 3](./leetcode/leetcode3.cpp)
 * [leetcode 340](./leetcode/leetcode340.cpp)
 * [leetcode 76](./leetcode/leetcode76.cpp)
@@ -119,13 +121,25 @@ prefix[right] - prefix[left - i] = sum;
 * [lintcode 1879 看似沒有單調性的變態](./lintcode/lintcode1879.cpp)
 * [lintcode 390](./lintcode/lintcode390.cpp)
 
-### 滑動窗口 sliding window
+參考下面模板：  
+```cpp
+// 我們把引路的指針比喻成教主，被引路的比喻成信徒好了
+while 教主還沒走完路
+    while satisfied-condition && 信徒還沒走完
+        信徒繼續走
+```
+上面想辦法維持了信徒與教主最近並且符合condition的距離。記住，教主跟信徒不同時動也不交錯，因此能得出`O(n)`的結果。  
+
+-> 滑動窗口 sliding window
 * [lintcode1849 經典題](./lintcode/lintcode1849.cpp)
 * [lintcode1850 隔板法](./lintcode/lintcode1850.cpp)
 
 sliding window通常會先用`O(window-size)`算出初始化的window sum。接下來每往右移一步都只需要考慮最左邊和最右邊的變化就好！  
 
 上面sliding window中有一種配合隔板法的變化題，通常會在同一個數組要求兩個不重合區間的最優解(interval sum之類的)。我們可以列舉隔板將數組分裂成兩塊，那就變成在兩塊中個別求sliding window。目前用起來雖然時間複雜度不是最好，但是思路最清晰！
+
+> O(n)可以先想雙指針，因為兩個指針不會交錯(因此條件為left <= right)。這樣整個n只會跑一次！
+> 同向雙指針的題目上若要思考是right先動還是left先動，從題目要的答案上去思考！目前偷偷看出兩個規律，一個是如果找最短結果，我們會在一個地方固定right，開始向右移動left來縮短範圍。而如果是找最長結果，那我們會先固定好left，然後把right往右推倒符合條件的位置並且擴大範圍。
 
 ### BFS
 * [...leetcode 200 traverse](./leetcode/leetcode200.cpp)
