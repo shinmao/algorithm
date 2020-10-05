@@ -359,6 +359,82 @@ Kruskal演算法流程：
 
 > 上面的node連結直接用union find實現即可。因為union find的connect不會導致circle
 
+### 字典樹 Trie
+* [Lintcode 333](./lintcode/lintcode333.cpp)
+
+
+優點在於查詢**公共prefix**  
+字母存在edges上，單字存在node上  
+每個node存了兩個attribute：`bool isword`, `string word`  
+在看模板之前先來弄清楚一些字典樹的小特性：  
+> 字典樹所有單字都是從root開始算起  
+
+> 字典樹的高度是最長單字的長度 + 1  
+
+好了。來上個模板吧...  
+```cpp
+class TrieNode {
+public:
+    TrieNode *next[26];
+    bool isword;
+    TrieNode() {
+        for(int i = 0; i < 26; i++) {
+            next[i] = NULL;
+        }
+        isword = false;
+    }
+};
+class Trie {
+private:
+    TrieNode *root;
+public:
+    /** Init */
+    Trie() {
+        root = new TrieNode();
+    }
+    /** 將所有的單字輸入建立字典樹 */
+    // 若下個node為null，代表還為插入字母
+    // new 一個 TrieNode
+    void insert(string word) {
+        TrieNode *p = root;
+        for(int i = 0; i < word.length(); i++) {
+            if(p->next[word[i] - 'a'] == NULL) {
+                p->next[word[i] - 'a'] = new TrieNode();
+            }
+            p = p->next[word[i] - 'a'];
+        }
+        p->isword = true;
+    }
+    /** 樹中是否存在word呢？ */
+    // 我們沒有代表edge的屬性，有的是node
+    // 因此我們會先把 ptr 指到下一個node，藉此來連上edge
+    bool search(string word) {
+        TrieNode *p = root;
+        for(int i = 0; i < word.length(); i++) {
+            p = p->next[word[i] - 'a'];
+            if(p == NULL)
+                return false;
+        }
+        // 注意我們最後回傳的是isword
+        // 儘管字典樹中存在這個word，但traverse到當前有可能僅僅是個prefix，而非word
+        return p->isword;
+    }
+    /** 樹中是否有單字是以prefix為前綴的呢？ */
+    bool startsWith(string prefix) {
+        TrieNode *p = root;
+        for(int i = 0; i < prefix.length(); i++) {
+            p = p->next[prefix[i] - 'a'];
+            if(p == NULL)
+                return false;
+        }
+        // 理念跟上面大致相同
+        // 但prefix就不需要為單字囉！
+        return true;
+    }
+};
+```
+簡單分析一下：除了題目原本的Trie class，我還另外創立了TrieNode這個class。TrieNode這個class有兩種屬性：1. 指到下一個node(`next`)。還記得Trie會把字母存在edge上嗎？26種字母代表指到下一條路徑有26種方法，用大小為26的陣列來代表即可。2. `isword`：從root traverse到當前TrieNode的路徑所拼接起來的字串，若為單字則為`true`。注意我們將其初始化為`null`。並非只是因為設計理念，其中還有包括初始化為`new TrieNode()`會造成死循環的原因。以上操作時間複雜度都為`O(L)`，L為字的長度。  
+
 ### 位運算技巧
 可以用位運算來加速時間複雜度因為電腦對十進位數字進行運算還要另外轉換成二進位。像是N-Queen公認最快的解法便是位運算的！  
 * [cxyxiaowu bit operation LC problem](https://www.cxyxiaowu.com/8990.html)  
