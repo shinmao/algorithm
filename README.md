@@ -239,6 +239,8 @@ return node;
 
 > 感覺topo幾乎用在不知道起點是哪裡，想要透過neighbor的關係理出整張圖的路線。而bfs用在已經知道起點在哪，求到終點的最短路線...etc。
 
+> 什麼時候用level order呢？level order其實就是代表每一次只能走一步，所以如果是算最短路徑的題目，我們想用每一層distance++來計算最終路徑，不用level order是不行的！不分層的bfs基本上用在算兩點是否相通而已... 另外一招便是把visited數組直接改distance數組...
+
 ### DFS
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
 * [leetcode 124 binary tree max path sum](./leetcode/leetcode124.cpp)
