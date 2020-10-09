@@ -147,6 +147,10 @@ sliding window通常會先用`O(window-size)`算出初始化的window sum。接�
 * [lintcode 630 shortest path](./lintcode/lintcode630.cpp)
 * [leetcode 269 經典topo題](./leetcode/leetcode269.cpp)
 * [lintcode 1364 傳送門](./lintcode/lintcode1364.cpp)
+* [lintcode 1565](./lintcode/lintcode1565.cpp)
+* [leetcode 200](./leetcode/leetcode200.cpp)
+* [lintcode 677](./lintcode/lintcode677.cpp)
+* [lintcode 598](./lintcode/lintcode598.cpp)
 
 queue：先進先出
 
@@ -239,7 +243,9 @@ return node;
 
 > 感覺topo幾乎用在不知道起點是哪裡，想要透過neighbor的關係理出整張圖的路線。而bfs用在已經知道起點在哪，求到終點的最短路線...etc。
 
-> 什麼時候用level order呢？level order其實就是代表每一次只能走一步，所以如果是算最短路徑的題目，我們想用每一層distance++來計算最終路徑，不用level order是不行的！不分層的bfs基本上用在算兩點是否相通而已... 另外一招便是把visited數組直接改distance數組...
+> 什麼時候用level order呢？level order是用解決計算步伐的問題。其實就是代表每一次只能走一步，所以如果是算最短路徑的題目，我們想用每一層distance++來計算最終路徑，不用level order是不行的！不分層的bfs基本上用在算兩點是否相通而已... 另外一招便是把visited數組直接改distance數組，我們就不用擔心每一次到底是加幾步的問題了: e.g. lintcode 1565裡的dist數組
+
+> 值得注意的是多原點類型的地圖問題：來比較一下 lintcode-677 和 lintcode-598 的處理方式。可以發現677中，我們邊用for迴圈遍歷地圖，邊在找到的出發點上進行bfs; 可是在598中，我們就分開動作，直接遍歷完整個地圖把出發點放入queue中，然後再進行bfs。兩個題目的不同處在於後者的map會不斷變動，也就是說出發點會不斷變動。為了在bfs上避免這個問題，才會有後者這種應對方式！
 
 ### DFS
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
