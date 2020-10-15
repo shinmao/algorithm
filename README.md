@@ -321,6 +321,7 @@ operation 2 必須把 operation 1 的影響還原回來
 * [leetcode 261](./leetcode/leetcode261.cpp)  
 * [leetcode 547](./leetcode/leetcode547.cpp)
 * [leetcode 721 經典必練題](./leetcode/leetcode721.cpp)
+* [lintcode 261](./lintcode/lintcode261.cpp)
 
 其實union find的模板很固定：  
 ```cpp
@@ -353,6 +354,8 @@ private:
 > 題目的node若為數字那我們用vector<int>存就好。如果是str之類型態，我們換成hashmap就好。
 
 > union find可以應用於MST的生成。union find的connect不會導致circle，因為他會先透過find查詢兩個點是否已經在同一個集合。
+
+> 要回傳一個點的root，一律用find(x)，用father[x]會錯。因為connect裡面並沒有繼續做路徑壓縮
 
 ### MST
 MST就是最小的connected graph，一個可以到所有的點的子圖。minimum則是路徑cost的最小總和。因此MST可能不是唯一的！  
@@ -453,3 +456,6 @@ public:
 ## 單調
 * [Leetcode 239 - mono deque](./leetcode/Leetcode239.cpp)
 * [leetcode 862 - mono deque](./leetcode/leetcode862.cpp)
+* [leetcode 621 - mono deque](./lintcode/lintcode621.cpp)
+
+> 這裡使用mono deque的題型有很大的概率都是為了維護sliding window或interval中的極值/總和，使用deque可以高效率的從隊首彈出，從隊尾為了維護單調性而彈出然後插入新元素。
