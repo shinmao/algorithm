@@ -10,6 +10,20 @@
 | 10   | O(2^n), O(n!)      | dfs, recursion |
 | 10^9   |       | 別再開array了 |
 
+### 出題頻率 by TA
+#### 很常见
+* bfs/dfs
+* 经典题：word ladder, word break, k largest...
+* 模拟（题目叫你做什么，你就做什么） Strange sort problem  Interger -> roman 
+#### 非常常见
+* 二叉树、dp（背包、序列型dp、坐标型、双序列型（Longest Common Substring/Subsequence）、常见问题（L Increasing Subsequence，L Palindrome String））
+、二分答案、前缀和与双指针
+* LRU、LFU，linkedlist（快慢指针，copy linkedlist with random pointer），扫描线和一些简单的数据结构
+（treemap, hashmap, heap， union find，trie...)
+#### 考得很少
+* 二分搜索（二分数值），比较难的dp（状压dp（Travel Salesman Problem），概率dp，区间dp），（手写）红黑树，dfs的非递归实现，矩阵快速幂
+* dij, spfa, KMP ...
+
 ### 遞迴
 遞迴通常會在`return`裏又回call一次function。遞迴是用來**間接**告訴你答案的，而非直接的。某一層做的事都是一樣的，所以我們只要管好自己這層的工作就好。另外遞迴一定會有終止條件(類似在開頭寫個`if() return`之類的)。    
 1. 分治法
@@ -150,6 +164,7 @@ sliding window通常會先用`O(window-size)`算出初始化的window sum。接�
 * [leetcode 200](./leetcode/leetcode200.cpp)
 * [lintcode 677](./lintcode/lintcode677.cpp)
 * [lintcode 598](./lintcode/lintcode598.cpp)
+* [lintcode 1422 visited紀錄的是整個圖的狀態](./lintcode/lintcode1422.cpp)
 
 queue：先進先出
 
