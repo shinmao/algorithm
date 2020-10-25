@@ -164,7 +164,8 @@ sliding window通常會先用`O(window-size)`算出初始化的window sum。接�
 * [leetcode 200](./leetcode/leetcode200.cpp)
 * [lintcode 677](./lintcode/lintcode677.cpp)
 * [lintcode 598](./lintcode/lintcode598.cpp)
-* [lintcode 1422 visited紀錄的是整個圖的狀態](./lintcode/lintcode1422.cpp)
+* [lintcode 1422 visited紀錄的是整個圖的狀態 (狀壓binary)](./lintcode/lintcode1422.cpp)
+* [lintcode 941 visited紀錄的是整張圖的狀態 (狀壓str)](./lintcode/lintcode941.cpp)
 
 queue：先進先出
 
@@ -259,7 +260,11 @@ return node;
 
 > 什麼時候用level order呢？level order是用解決計算步伐的問題。其實就是代表每一次只能走一步，所以如果是算最短路徑的題目，我們想用每一層distance++來計算最終路徑，不用level order是不行的！不分層的bfs基本上用在算兩點是否相通而已... 另外一招便是把visited數組直接改distance數組，我們就不用擔心每一次到底是加幾步的問題了: e.g. lintcode 1565裡的dist數組
 
-> 值得注意的是多原點類型的地圖問題：來比較一下 lintcode-677 和 lintcode-598 的處理方式。可以發現677中，我們邊用for迴圈遍歷地圖，邊在找到的出發點上進行bfs; 可是在598中，我們就分開動作，直接遍歷完整個地圖把出發點放入queue中，然後再進行bfs。兩個題目的不同處在於後者的map會不斷變動，也就是說出發點會不斷變動。為了在bfs上避免這個問題，才會有後者這種應對方式！
+> 值得注意的是多出發點類型的地圖問題：來比較一下 lintcode-677 和 lintcode-598 的處理方式。可以發現677中，我們邊用for迴圈遍歷地圖，邊在找到的出發點上進行bfs; 可是在598中，我們就分開動作，直接遍歷完整個地圖把出發點放入queue中，然後再進行bfs。兩個題目的不同處在於後者的map會不斷變動，也就是說出發點會不斷變動。為了在bfs上避免這個問題，才會有後者這種應對方式！
+
+> 為何多出發點類型的問題中，先找到的路徑就一定是最短路徑呢？記住！我們並不是把一條路徑完成才去遍歷下一條，仔細看BFS的結構，他的while loop是在每一條路徑上各踏一步下去進行的，因此比較短的路徑當然會先完成，就可以先return囉！
+
+> 關於visited的思路：代表訪問過的不再訪問。但，對象未必是點，也可能是狀態。常見的hard題型常常把題圖狀態壓縮放到visited之中，通常這種時候input size都會特別小，可以用二進位或者是string的方式把地圖壓縮成一維！
 
 ### DFS
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
