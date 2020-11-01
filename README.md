@@ -168,6 +168,7 @@ sliding window通常會先用`O(window-size)`算出初始化的window sum。接�
 * [lintcode 1422 visited紀錄的是整個圖的狀態 (狀壓binary)](./lintcode/lintcode1422.cpp)
 * [lintcode 941 visited紀錄的是整張圖的狀態 (狀壓str)](./lintcode/lintcode941.cpp)
 * [lintcode 573](./lintcode/lintcode573.cpp)
+* [lintcode 1828](./lintcode/lintcode1828.cpp)
 
 queue：先進先出
 
