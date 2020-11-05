@@ -1,8 +1,16 @@
-// 果然遞迴的思維很靠腦袋想像呀
-// 仔細看看下面遞迴式考慮了所有可能
-// lmax和rmax代表沒有root的情況下子樹的最大值
-// sum則是去比較如果選了root和左子右子的情況會不會比較厲害
-// 最後return的地方則是在每一次check子樹的極值時都看看要不要加root
+/** 對於每個node
+ *          r
+ *      1 /  \
+ *       n
+ *    2 /  \ 3
+ *     l    r
+ * 我們都要考慮：
+ * node->val e.g. 走了 1
+ * node->val + dfs(node->left) e.g. 走了 1 -> 2...
+ * node->val + dfs(node->right) e.g. 走了 1 -> 3...
+ * node->val + dfs(node->left) + dfs(node->right): 走了 2 -> 3
+ * 要注意一個小陷阱，若是負的那我們還寧願不走，0還比較大
+ **/
 private:
     int dfs(TreeNode* root, int& sum) {
         if(root == nullptr)

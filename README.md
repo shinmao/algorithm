@@ -170,7 +170,10 @@ sliding window通常會先用`O(window-size)`算出初始化的window sum。接�
 * [lintcode 573](./lintcode/lintcode573.cpp)
 * [lintcode 1828](./lintcode/lintcode1828.cpp)
 
-queue：先進先出
+time complexity: `O(n)`  
+space complexity: `O(n)`  
+
+queue：先進先出  
 
 不分層：  
 ```cpp
@@ -269,10 +272,26 @@ return node;
 
 > 關於visited的思路：代表訪問過的不再訪問。但，對象未必是點，也可能是狀態。常見的hard題型常常把題圖狀態壓縮放到visited之中，通常這種時候input size都會特別小，可以用二進位或者是string的方式把地圖壓縮成一維！
 
+### 樹上問題
+#### BFS
+
+> 求樹上最大直徑
+
+思路：請參考[下面comment](./lintcode/lintcode291.cpp)  
+兩次BFS：第一次由任一點出發找最遠的點t1，第二次由t1出發找最遠的點，第二次得到的最大距離就是解！  
+Follow up求第二路徑: 破壞我們的第一直徑。非由兩個端點一起構成的路徑中最大的，就是第二直徑！  
+
+* [lintcode 1469](./lintcode/lintcode1469.cpp)
+* [lintcode 291](./lintcode/lintcode291.cpp)
+
+#### DFS
+
 ### DFS
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
 * [leetcode 124 binary tree max path sum](./leetcode/leetcode124.cpp)
 * [lintcode 262 heir tree](./lintcode/lintcode262.cpp)
+
+time complexity: `O(方案總數 * 每個方案的時間)`
 
 在經典問題subset/permutation中，有兩種實現方式：一是在每一層選擇加/不加，二則是backtrack。Backtrack的方式非常適合用來做排列。  
 第一種方式的話，要加入dfs出口條件：當(加/不加)決定通過了最後一個元素，就可以打包行李走人囉！  
@@ -301,7 +320,7 @@ operation 2 必須把 operation 1 的影響還原回來
 
 > 一般求所有方案的題目可以往dfs方向想
 
-> 如果還是爆棧了，唉還是用看看BFS唄
+> 如果還是爆棧了，唉還是用看看BFS唄 (當然連通塊問題和topo-sort的問題用DFS肯定爆)
 
 ### 動態規劃
 * [leetcode 256](./leetcode/leetcode256.cpp)
