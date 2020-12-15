@@ -284,12 +284,15 @@ Follow up求第二路徑: 破壞我們的第一直徑。非由兩個端點一起
 * [lintcode 1469](./lintcode/lintcode1469.cpp)
 * [lintcode 291](./lintcode/lintcode291.cpp)
 
-#### DFS
-
 ### DFS
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
 * [leetcode 124 binary tree max path sum](./leetcode/leetcode124.cpp)
 * [lintcode 262 heir tree](./lintcode/lintcode262.cpp)
+* [lintcode 582 wordbreak II 列出所有方案](./lintcode/lintcode582.cpp)
+
+:star: Trajan's algorithm  
+critical connection的定義是指如果把該edge拆除，將會影響到網路中某些節點不能連結。要找出這種edge，Trajan的想法是找出**非環中**的edge！每一次dfs traversal紀錄下當前節點所能訪問到的最小深度，若回傳的深度比當前節點還深則代表**非環**！  
+* [lintcode1271 Critical Connections in network](./lintcode/lintcode1271.cpp)
 
 time complexity: `O(方案總數 * 每個方案的時間)`
 
@@ -323,8 +326,29 @@ operation 2 必須把 operation 1 的影響還原回來
 > 如果還是爆棧了，唉還是用看看BFS唄 (當然連通塊問題和topo-sort的問題用DFS肯定爆)
 
 ### 動態規劃
-* [leetcode 256](./leetcode/leetcode256.cpp)
-* [leetcode 416 背包問題](./leetcode/leetcode416.cpp)
+關鍵字：  
+方案總數/極值/可行性  
+類型：  
+1. 坐標型, e.g. Unique paths
+2. 序列型, e.g. Paint house
+3. 劃分型, e.g. Decode ways
+4. 區間型, e.g. Stone game
+5. 雙序列, e.g. Longest common subsequence
+6. 狀壓, e.g. Traveling Salesman Problem
+7. 概率型, e.g. Dices sum
+8. 博弈型, e.g. Coins in a line
+9. 樹上, e.g. House robber III
+
+* [leetcode 256](./leetcode/leetcode256.cpp)  
+
+劃分型dp：  
+* [leetcode 139 word break](./leetcode/leetcode139.cpp)
+* [lintcode 512 decode ways](./lintcode/lintcode512.cpp)
+* [lintcode 676 decode ways II](./lintcode/lintcode676.cpp)
+
+> dp[i]代表前i個的部分是否可行
+> 前綴型的dp
+> 比較沒感覺:)
 
 區間型dp要注意：  
 把區間分割後如果用枚舉的來求解，可能後區間的答案前面還沒算過  
@@ -333,12 +357,13 @@ operation 2 必須把 operation 1 的影響還原回來
 * [lintcode 476/593 stone game](./lintcode/lintcode476-593.cpp)  
 
 > 區間型dp最有名的優化方式：用四邊形不等式優化枚舉切割點的時間
+> 區間型dp常見的定義是dp[i][j] = dp[i][k] + dp[k + 1][j]，也就是更小區間的最優解。不過就要注意，在運算dp陣列時k不能用枚舉的，因為後面的區間結果我們根本還沒有！取而代之，可以用長度枚舉。
 
 
-雖然用數組先把答案存起來像dp，但沒有順序性，單存由dfs traverse的memoi類型：  
+雖然用數組先把答案存起來像dp，但沒有順序性，單純由dfs traverse的memoi類型：  
 * [leetcode 337 樹上dp](./leetcode/leetcode337.cpp)  
 * [正則...]()  
-* [word break...]()   
+* [lintcode 107 word break](./lintcode/lintcode107.cpp)   
 
 
 -> 子問題 而且 只解決一次  
@@ -354,6 +379,43 @@ operation 2 必須把 operation 1 的影響還原回來
 思路：  
 可以塞滿代表(n - 1)個東西時就能塞滿或是n個東西剛好能塞滿？  
 背包問題有很高的機會可以加以優化呦！  
+* [lintcode 563 0/1背包問題](./lintcode/lintcode563.cpp)
+* [leetcode 416 背包問題](./leetcode/leetcode416.cpp)
+
+概率型dp:  
+求概率  
+* [lintcode 20](./lintcode/lintcode20.cpp)
+
+股票問題：  
+思路: 狀態機，列舉出狀態和相應的選擇  
+@Labuladong: 最優解也是來自dp陣列的化簡  
+狀態有三種：buy, sell, rest  
+狀態不好懂的話，翻譯成文字就能理解了  
+```
+先列轉移方程：
+昨天就持有，或今天買的
+dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
+昨天就沒有，或今天賣掉的
+dp[i][k][0] = max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i]);
+
+根據out of bound的case思考base case：
+根本還沒開始交易
+dp[-1][k][0] = 0
+還沒開始交易，哪來的利潤，用負無窮表示
+dp[-1][k][1] = INT_MIN
+k是從1開始的
+k為0的情況代表還沒開始交易
+dp[i][0][0] = 0
+dp[i][0][1] = INT_MIN
+
+轉移方程裡：k很少次(可以直接列舉)，或是無限的情況，甚至都不需要k這個dimension了
+```
+* [lintcode 149 交易一次](./lintcode/lintcode149.cpp)
+* [lintcode 150 交易次數無限](./lintcode/lintcode150.cpp)
+* [lintcode 995 交易無限 + cooldown一天](./lintcode/lintcode995.cpp)
+* [lintcode 1000 有手續費喔！](./lintcode/lintcode1000.cpp)
+* [lintcode 151 交易兩次](./lintcode/lintcode151.cpp)
+* [lintcode 393 k次交易 內存爆炸怎麼解決](./lintcode/lintcode393.cpp)
 
 > DP是用來將指數時間和階層時間的問題優化成O(n^2), O(n^3)的。如果問題本來就可以在更短的時間內解決，那代表dp是不適用的方法
 
