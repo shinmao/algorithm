@@ -68,7 +68,7 @@ if(start != num.size() && nums[start] == target)
 // III.
 while(start + 1 < end) {
     if(nums[mid] == target)
-        return mid;\
+        return mid;
     if(nums[mid] < target)
         start = mid;
     else
@@ -78,7 +78,56 @@ if(nums[start] == target)
     return start;
 if(nums[end] == target)
     return end;
-```
+// left bound
+int start = 0, end = nums.size() - 1;
+while(start <= end) {
+    int mid = start + (end - start) >> 1;
+    if(nums[mid] < target) {
+        left = mid + 1;
+    }else if(nums[mid] > target){
+        right = mid - 1;
+    }else if(nums[mid] == target) {
+        right = mid - 1;
+    }
+}
+// 我們要回傳left，上面我們一直把left往右加，所以要先檢查left有沒有超出最右界
+if(left >= nums.size() || nums[left] != target)
+    return -1;
+return left;
+// right bound
+while(start <= end) {
+    int mid = start + (end - start) >> 1;
+    if(nums[mid] < target) {
+        left = mid + 1;
+    }else if(nums[mid] > target) {
+        right = mid - 1;
+    }else if(nums[mid] == target) {
+        left = mid + 1;
+    }
+}
+if(right < 0 || nums[right] != target)
+    return -1;
+return right;
+```  
+
+:star: 再次更新  
+感謝@labuladong  
+其實上面三種模板通通可以用`[]`都方法來實現  
+首先分析一下三種模板  
+1. 若是最基本的，只想要找到target的idx  
+因為我們把right初始化為`arr.size() - 1` ，所以**搜索區間**是`[left, right]`  
+因此while裡面應該是`(left <= right)`，子區間也是左閉右閉，所以應該是`left = mid + 1`和`right = mid - 1`  
+因為只要找到target的idx即可，所以相等立刻return
+2. target有複數個，想要尋找左側邊界  
+因為我們把right初始化為`arr.size()`，所以**搜索區間**是`[left, right)`  
+因此while裡面應該是`(left < right)`，子區間也是左閉右開，所以應該是`left = mid + 1`和`right = mid`  
+因為要找到左側邊界，所以就算找到target也不要立刻return，而是繼續左移right來找到左側邊界  
+3. target有複數個，想要尋找右側邊界  
+因為我們把right初始化`arr.size()`，所以**搜索區間**是`[left, right)`  
+因此while裡面應該是`(left < right)`，子區間也是左閉右開，所以應該是`left = mid + 1`和`right = mid`  
+因為要找到右側邊界，所以就算找到target也不要立刻return，而是繼續右移left來找到右側邊界  
+
+> 原來究竟要選(mid + 1)還是(mid)完全是由區間的樣子決定呀！while(left < right)區間為左閉右開的情況下，子區間也必定會是左閉右開。我們檢查完mid上的元素之後，改變的搜索區間不需要再檢查一次mid，因此子區間會變成[left, mid - 1.....)mid.....[mid + 1, right)
 
 :star: 跳躍法  
 ```cpp
@@ -326,6 +375,10 @@ operation 2 必須把 operation 1 的影響還原回來
 > 如果還是爆棧了，唉還是用看看BFS唄 (當然連通塊問題和topo-sort的問題用DFS肯定爆)
 
 ### 動態規劃
+第一步：確認**狀態**和**選擇**  
+第二步：dp數組的定義(可以一維表示一個狀態)，其實這裡很看套路  
+第三步：選擇，實現狀態轉移  
+第四步：coding邊處理邊界狀況吧  
 關鍵字：  
 方案總數/極值/可行性  
 類型：  
@@ -375,10 +428,12 @@ operation 2 必須把 operation 1 的影響還原回來
 3. 轉移方程：要注意初始條件和邊界
 
 背包問題：  
-背包大小為m，我行李中有些東西想放進去，有沒有機會塞滿滿？  
+狀態： 背包的容量, 可選擇的物品  
+選擇： 物品放進背包/不放  
 思路：  
 可以塞滿代表(n - 1)個東西時就能塞滿或是n個東西剛好能塞滿？  
 背包問題有很高的機會可以加以優化呦！  
+* [lintcode 92 背包問題(物品沒有價值的版本)](./lintcode/lintcode92.cpp)
 * [lintcode 563 0/1背包問題](./lintcode/lintcode563.cpp)
 * [leetcode 416 背包問題](./leetcode/leetcode416.cpp)
 
