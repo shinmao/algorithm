@@ -432,10 +432,16 @@ operation 2 必須把 operation 1 的影響還原回來
 選擇： 物品放進背包/不放  
 思路：  
 可以塞滿代表(n - 1)個東西時就能塞滿或是n個東西剛好能塞滿？  
-背包問題有很高的機會可以加以優化呦！  
+背包問題有很高的機會可以進行狀態壓縮喔！  
 * [lintcode 92 背包問題(物品沒有價值的版本)](./lintcode/lintcode92.cpp)
-* [lintcode 563 0/1背包問題](./lintcode/lintcode563.cpp)
+* [lintcode 563 0/1背包問題](./lintcode/lintcode563.cpp)  
+
+背包問題的變形：  
 * [leetcode 416 背包問題](./leetcode/leetcode416.cpp)
+
+完全背包問題(物品數量無限)：  
+* [leetcode 518](./leetcode/leetcode518.cpp)
+* [lintcode 440](./lintcode/lintcode440.cpp)
 
 概率型dp:  
 求概率  
