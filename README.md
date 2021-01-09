@@ -396,6 +396,11 @@ operation 2 必須把 operation 1 的影響還原回來
 思考原本轉移方程中狀態對應到二維中的什麼位置  
 壓縮到一維後會不會被覆蓋掉  
 可以用變量保存或者改變遍歷順序就好  
+[揭開DP狀態壓縮的神秘面紗](https://blog.1pwnch.com/posts/dp-optimize/)  
+
+解決兩個字符串的DP問題：  
+通常是用兩根指針分別指向**兩個字串**  
+* [leetcode 72 edit distance](./leetcode/leetcode72.cpp)  
 
 類型：  
 1. 坐標型, e.g. Unique paths
@@ -486,7 +491,7 @@ dp[i][0][1] = INT_MIN
 
 > DP是用來將指數時間和階層時間的問題優化成O(n^2), O(n^3)的。如果問題本來就可以在更短的時間內解決，那代表dp是不適用的方法
 
-> DP空間常常可以優化，如果發現之前的資訊其實不需要了，可以用變數來代替就好
+> DP數組跟遞歸就只有一線之隔。差距在於DP數組由底向上求解(問題規模由小到大)，遞歸由頂向下求解(問題規模由大而小)
 
 ### 並查集Union find
 * [leetcode 261](./leetcode/leetcode261.cpp)  
