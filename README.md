@@ -398,22 +398,19 @@ operation 2 必須把 operation 1 的影響還原回來
 可以用變量保存或者改變遍歷順序就好  
 [揭開DP狀態壓縮的神秘面紗](https://blog.1pwnch.com/posts/dp-optimize/)  
 
-解決兩個字符串的DP問題：  
-通常是用兩根指針分別指向**兩個字串**  
-* [leetcode 72 edit distance](./leetcode/leetcode72.cpp)  
-
-類型：  
-1. 坐標型, e.g. Unique paths
-2. 序列型, e.g. Paint house
-3. 劃分型, e.g. Decode ways
-4. 區間型, e.g. Stone game
-5. 雙序列, e.g. Longest common subsequence
-6. 狀壓, e.g. Traveling Salesman Problem
-7. 概率型, e.g. Dices sum
-8. 博弈型, e.g. Coins in a line
-9. 樹上, e.g. House robber III
-
-* [leetcode 256](./leetcode/leetcode256.cpp)  
+子序列型 and 子數組型dp：  
+subsequence的問題比subarray的問題還要困難，因為subsequence是不連續的，要列舉所有的可能性就需要指數級別的時間。所以基本上`subsequence + 求極值`一定是用動態規劃！  
+subsequence的問題離不開這兩種定義模板：  
+```cpp
+dp[i]: 代表以array[i]作結的子序列
+dp[i][j]:
+若有兩個字串或數組的話，代表arr1[0...i]和arr2[0...j]的關係為dp[i][j]
+若只有一個字串或數組，代表arr[i...j]為dp[i][j]
+```
+* [leetcode 516](./leetcode/leetcode516.cpp)
+* ([回文substring的話請參考leetcode 5](./leetcode/leetcode5.cpp))
+* [leetcode 256](./leetcode/leetcode256.cpp)
+* [leetcode 72](./leetcode/leetcode72.cpp)
 
 劃分型dp：  
 * [leetcode 139 word break](./leetcode/leetcode139.cpp)
@@ -492,6 +489,10 @@ dp[i][0][1] = INT_MIN
 > DP是用來將指數時間和階層時間的問題優化成O(n^2), O(n^3)的。如果問題本來就可以在更短的時間內解決，那代表dp是不適用的方法
 
 > DP數組跟遞歸就只有一線之隔。差距在於DP數組由底向上求解(問題規模由小到大)，遞歸由頂向下求解(問題規模由大而小)
+
+> 常常疑惑為何dp數組要這樣定義呢？是為了狀態轉移。找狀態轉移需要歸納思維，也就是從已知的結果推斷未知的部分。
+
+> 不知道要怎麼決定遍歷方向時，把圖畫出來看更新狀態所需的已知狀態在哪兒，就能理解要怎麼遍歷了
 
 ### 並查集Union find
 * [leetcode 261](./leetcode/leetcode261.cpp)  

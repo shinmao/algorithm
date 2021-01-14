@@ -1,31 +1,34 @@
-// idea: DP
-// beats only over 7% of submission
+/**
+ * 注意！這題是要substring，也就是必須連續，並非subsequence
+ * 回文串的長度可能為奇數也可能是偶數
+ * 若為奇數，那中心點就只有一個char
+ * 若為偶數，那中心點將有兩個char
+ * 用下面這種function的寫法會簡潔很多
+ * 然後把每一個字都當作中心點看看
+ */
 class Solution {
 public:
+    // center_l: index of left center
+    // center_r: index of right center
+    string palindrome(string s, int center_l, int center_r) {
+        while(center_l >= 0 && center_r < s.size() && s[center_l] == s[center_r]) {
+            center_l--;
+            center_r++;
+        }
+        
+        return s.substr(center_l + 1, center_r - center_l - 1);
+    }
+    
     string longestPalindrome(string s) {
-        int max = 1;
-        int start = 0;
-        int len = s.size();
-        if(len == 0) return "";
-        vector<vector<bool>> dp(len, vector<bool>(len, false));
-        // init dp to be false
-        for(int i = 0; i < len; ++i) {
-            dp[i][i] = true;
+        if(s.size() == 1) return s;
+        string res;
+        for(int i = 0; i < s.size(); i++) {
+            string s1 = palindrome(s, i, i);
+            string s2 = palindrome(s, i, i + 1);
+            res = s1.size() > res.size() ? s1 : res;
+            res = s2.size() > res.size() ? s2 : res;
         }
-        for(int i = 0; i < len - 1; ++i) {
-            dp[i][i + 1] = (s[i] == s[i + 1]);
-            if(dp[i][i + 1]) 
-                max = 2, start = i;
-        }
-        for(int l = 2; l < len; ++l) {
-            // len starts from 3
-            for(int i = 0; i < len - l; ++i) {
-                int j = i + l;
-                dp[i][j] = (s[i] == s[j] && dp[i+1][j-1]) == true;
-                if(dp[i][j] && (j - i + 1) > max)
-                    max = j - i + 1, start = i;
-            }
-        }
-        return s.substr(start, max);
+        
+        return res;
     }
 };
