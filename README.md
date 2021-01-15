@@ -120,7 +120,7 @@ return right;
 因為只要找到target的idx即可，所以相等立刻return
 2. target有複數個，想要尋找左側邊界  
 因為我們把right初始化為`arr.size()`，所以**搜索區間**是`[left, right)`  
-因此while裡面應該是`(left < right)`，子區間也是左閉右開，所以應該是`left = mid + 1`和`right = mid`  
+因此while裡面應該是`(left < right)`，子區間也是左閉右開。檢查完`mid`後，左區間應該是`[left, mid)`，而右區間是`[mid + 1, right)`。  
 因為要找到左側邊界，所以就算找到target也不要立刻return，而是繼續左移right來找到左側邊界  
 3. target有複數個，想要尋找右側邊界  
 因為我們把right初始化`arr.size()`，所以**搜索區間**是`[left, right)`  
@@ -411,6 +411,7 @@ dp[i][j]:
 * ([回文substring的話請參考leetcode 5](./leetcode/leetcode5.cpp))
 * [leetcode 256](./leetcode/leetcode256.cpp)
 * [leetcode 72](./leetcode/leetcode72.cpp)
+* [leetcode 300 (Longest Increasing Subsequence) (+ binary search)](./leetcode/leetcode300.cpp)
 
 劃分型dp：  
 * [leetcode 139 word break](./leetcode/leetcode139.cpp)
