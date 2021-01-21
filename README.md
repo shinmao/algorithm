@@ -333,7 +333,40 @@ Follow up求第二路徑: 破壞我們的第一直徑。非由兩個端點一起
 * [lintcode 1469](./lintcode/lintcode1469.cpp)
 * [lintcode 291](./lintcode/lintcode291.cpp)
 
+#### DFS
+binary tree題型的話有很高機率用dfs做，將答案切分成左子樹和右子樹(divide and conquer)。  
+binary tree上的DFS可以分成求值(e.g. 路徑，極值)或修改tree架構(e.g. 請把tree改成鏈表)兩種類型。  
+遞歸的思想真的很不直觀  
+tree的問題不用把左右子樹分開想，兩個孩子要做的事情是一樣的  
+return value通常是父親想從兒子那邊獲得的訊息，從這個角度去著手  
+有趣的是，最終答案也不會是這個dfs的return value，return value只是一個傳送訊息的媒介，我們的答案在於divide之後conquer的資訊!  
+
 ### DFS
+DFS就是將**backtracking**用在樹型的資料結構上  
+只需要思考三個問題：  
+1. 做過的選擇
+2. 當前可選的選擇
+3. 終止條件  
+```cpp
+vector<T> res;
+void backtrack(saved choice, curr choice) {
+    if(終止條件) {
+        res.push_back(saved choice)
+        return
+    }
+
+    for(auto choice in curr choice) {
+        make choice
+        backtrack(saved choice, curr choice)
+        reset choice
+    }
+}
+```
+* [leetcode 46 排列(無重複) backtrack + 用visited排除已經選過的](./leetcode/leetcode46.cpp)
+* [leetcode 47 排列(有重複) 選代表](./leetcode/leetcode47.cpp)
+* [leetcode 51 N Queens 加上撇和捺的visited即可](./leetcode/leetcode51.cpp)
+* [leetcode 78 子集(無重複) backtrack + 用start idx排除已經選過的](./leetcode/leetcode78.cpp)
+* [leetcode 77 組合 backtrack + start idx](./leetcode/leetcode77.cpp)
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
 * [leetcode 124 binary tree max path sum](./leetcode/leetcode124.cpp)
 * [lintcode 262 heir tree](./lintcode/lintcode262.cpp)
@@ -343,36 +376,7 @@ Follow up求第二路徑: 破壞我們的第一直徑。非由兩個端點一起
 critical connection的定義是指如果把該edge拆除，將會影響到網路中某些節點不能連結。要找出這種edge，Trajan的想法是找出**非環中**的edge！每一次dfs traversal紀錄下當前節點所能訪問到的最小深度，若回傳的深度比當前節點還深則代表**非環**！  
 * [lintcode1271 Critical Connections in network](./lintcode/lintcode1271.cpp)
 
-time complexity: `O(方案總數 * 每個方案的時間)`
-
-在經典問題subset/permutation中，有兩種實現方式：一是在每一層選擇加/不加，二則是backtrack。Backtrack的方式非常適合用來做排列。  
-第一種方式的話，要加入dfs出口條件：當(加/不加)決定通過了最後一個元素，就可以打包行李走人囉！  
-第二種方式的話，不需要加入出口條件：因為我們用for迴圈循環加入元素時，迴圈就有個上限了！  
-解決重複元素的問題(搭配backtrack)：選代表(通常我們會選第一個最方便)，然後用`index`與`start-index`判斷是否為重複元素中的第一個(注意！這裡就跟上面不一樣，一定要sort喔，不然重複的元素會無法擠到一起)  
-解決排列元素的問題(搭配backtrack)：每一次都從整個陣列遍歷一遍，因此不需要一個`start-index`。使用`visited`陣列來判斷元素有沒有被加入到子陣列中。出口條件便是：如果我們的子陣列還沒有加入原陣列所有元素，就要繼續遍歷下去！  
-
-binary tree題型的話有很高機率用dfs做，將答案切分成左子樹和右子樹(divide and conquer)。  
-binary tree上的DFS可以分成求值(e.g. 路徑，極值)或修改tree架構(e.g. 請把tree改成鏈表)兩種類型。  
-遞歸的思想真的很不直觀  
-tree的問題不用把左右子樹分開想，兩個孩子要做的事情是一樣的  
-return value通常是父親想從兒子那邊獲得的訊息，從這個角度去著手  
-有趣的是，最終答案也不會是這個dfs的return value，return value只是一個傳送訊息的媒介，我們的答案在於divide之後conquer的資訊!  
-
-樹還有一種題目是用DP下去做的喔，也就是父節點的資訊可以由子結點彙整就好，詳細情況看下面DP的部分唄...  
-
-在寫每一層的內容時，盡量只想著當前這層，在callback時再思考與其他層的關係
-
-dfs backtrack竅門:  
-```cpp
-opertaion 1
-dfs()
-operation 2
-```
-operation 2 必須把 operation 1 的影響還原回來  
-
-> 一般求所有方案的題目可以往dfs方向想
-
-> 如果還是爆棧了，唉還是用看看BFS唄 (當然連通塊問題和topo-sort的問題用DFS肯定爆)
+time complexity: `O(方案總數 * 每個方案的時間)`  
 
 ### 動態規劃
 第一步：確認**狀態**和**選擇**  
@@ -412,6 +416,9 @@ dp[i][j]:
 * [leetcode 256](./leetcode/leetcode256.cpp)
 * [leetcode 72](./leetcode/leetcode72.cpp)
 * [leetcode 300 (Longest Increasing Subsequence) (+ binary search)](./leetcode/leetcode300.cpp)
+* [leetcode 354 (Longest Increasing Subsequence變種)](./leetcode/leetcode354.cpp)
+
+> LIS可以用patience sorting解，時間複雜度對數級別
 
 劃分型dp：  
 * [leetcode 139 word break](./leetcode/leetcode139.cpp)

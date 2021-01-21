@@ -39,57 +39,37 @@ class Solution {
     }
 }
 
-// C++ version is slower than java version...
-// idea: backtrack
-// all nodes in the tree are our results
-// [] -> [1] -> [1, 2] -> [1, 2, 3]
-// backtack: [1, 2, 3] -> [1, 2] -> [1] -> [1, 3] -> [1] -> [] -> [2] ...
-// beats over 62% of submission
+/**
+ * 思路：backtrack
+ * beats over 100%
+ */
 class Solution {
-    private:
-        void dfs(vector<int>& nums, int start, vector<int>& sublist, vector<vector<int>>& res){
-            res.push_back(sublist);
-            
-            for(int i = start; i < nums.size(); ++i){
-                sublist.push_back(nums.at(i));
-                dfs(nums, i+1, sublist, res);
-                sublist.pop_back();
-            }
-        }
-    public:
-        vector<vector<int>> subsets(vector<int>& nums) {
-            vector<int> sublist;
-            vector<vector<int>> res;
-            
-            dfs(nums, 0, sublist, res);
-            
-            return res;
-        }
-    };
-
-// idea: still backtrack
-// but a little different from the above in dfs
-// beats only over 61% of submission
-class Solution {
-    private void dfs(int[] nums, int start, List<Integer> sublist, List<List<Integer>> result){
-        result.add(sublist);
+public:
+    void dfs(vector<int> nums,
+            int start,
+            vector<int> s, 
+            vector<vector<int>>& res) {
+        res.push_back(s);
         
-        for(int i = start; i < nums.length; i++){
-            List<Integer> newlist = new ArrayList<>(sublist);
-            newlist.add(nums[i]);
-            dfs(nums, i+1, newlist, result);
+        for(int i = start; i < nums.size(); i++) {
+            s.push_back(nums[i]);
+            dfs(nums, i + 1, s, res);
+            s.pop_back();
         }
     }
     
-    public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        if(nums == null) return result;
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0)
+            return {{}};
         
-        dfs(nums, 0, new ArrayList<>(), result);
+        vector<int> s;
+        vector<vector<int>> res;
+        dfs(nums, 0, s, res);
         
-        return result;
+        return res;
     }
-}
+};
 
 // BFS
 // idea: 從上到下每一層各是一個元素的，兩個的，三個的...
