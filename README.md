@@ -24,6 +24,10 @@
 * 二分搜索（二分数值），比较难的dp（状压dp（Travel Salesman Problem），概率dp，区间dp），（手写）红黑树，dfs的非递归实现，矩阵快速幂
 * dij, spfa, KMP ...
 
+### 資料結構的妙用
+#### Stack
+* [leetcode 20 判斷括號合法性](./leetcode/leetcode20.cpp)
+
 ### 遞迴
 遞迴通常會在`return`裏又回call一次function。遞迴是用來**間接**告訴你答案的，而非直接的。某一層做的事都是一樣的，所以我們只要管好自己這層的工作就好。另外遞迴一定會有終止條件(類似在開頭寫個`if() return`之類的)。    
 1. 分治法
@@ -367,6 +371,7 @@ void backtrack(saved choice, curr choice) {
 * [leetcode 51 N Queens 加上撇和捺的visited即可](./leetcode/leetcode51.cpp)
 * [leetcode 78 子集(無重複) backtrack + 用start idx排除已經選過的](./leetcode/leetcode78.cpp)
 * [leetcode 77 組合 backtrack + start idx](./leetcode/leetcode77.cpp)
+* [leetcode 22 生成合法括號 左括號數 >= 右括號數](./leetcode/leetcode22.cpp)
 * [leetcode 543 binary tree](./leetcode/leetcode543.cpp)
 * [leetcode 124 binary tree max path sum](./leetcode/leetcode124.cpp)
 * [lintcode 262 heir tree](./lintcode/lintcode262.cpp)
