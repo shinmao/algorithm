@@ -413,7 +413,9 @@ subsequence的問題離不開這兩種定義模板：
 ```cpp
 dp[i]: 代表以array[i]作結的子序列
 dp[i][j]:
-若有兩個字串或數組的話，代表arr1[0...i]和arr2[0...j]的關係為dp[i][j]
+若有兩個字串或數組的話，
+代表arr1[0...i]和arr2[0...j]的關係為dp[i][j]
+arr1前i個和arr2前j個的關係為dp[i][j]
 若只有一個字串或數組，代表arr[i...j]為dp[i][j]
 ```
 * [leetcode 516](./leetcode/leetcode516.cpp)
@@ -422,6 +424,9 @@ dp[i][j]:
 * [leetcode 72](./leetcode/leetcode72.cpp)
 * [leetcode 300 (Longest Increasing Subsequence) (+ binary search)](./leetcode/leetcode300.cpp)
 * [leetcode 354 (Longest Increasing Subsequence變種)](./leetcode/leetcode354.cpp)
+* [leetcode 1143 (Longest Common Subsequence)](./leetcode/leetcode1143.cpp)
+* [leetcode 583 (拐著彎叫你求LCS)](./leetcode/leetcode583.cpp)
+* [leetcode 712 (求最大ASCII sum的 LCS)](./leetcode/leetcode712.cpp)
 
 > LIS可以用patience sorting解，時間複雜度對數級別
 
