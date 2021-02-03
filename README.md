@@ -379,7 +379,7 @@ void backtrack(saved choice, curr choice) {
 
 :star: Trajan's algorithm  
 critical connection的定義是指如果把該edge拆除，將會影響到網路中某些節點不能連結。要找出這種edge，Trajan的想法是找出**非環中**的edge！每一次dfs traversal紀錄下當前節點所能訪問到的最小深度，若回傳的深度比當前節點還深則代表**非環**！  
-* [lintcode1271 Critical Connections in network](./lintcode/lintcode1271.cpp)
+* [lintcode 1271 Critical Connections in network](./lintcode/lintcode1271.cpp)
 
 time complexity: `O(方案總數 * 每個方案的時間)`  
 
@@ -511,6 +511,13 @@ dp[i][0][1] = INT_MIN
 > 常常疑惑為何dp數組要這樣定義呢？是為了狀態轉移。找狀態轉移需要歸納思維，也就是從已知的結果推斷未知的部分。
 
 > 不知道要怎麼決定遍歷方向時，把圖畫出來看更新狀態所需的已知狀態在哪兒，就能理解要怎麼遍歷了
+
+### 貪心問題
+每一次都選局部最優，最後就能得到全局最優的答案  
+* [leetcode 435 無重疊區間問題](./leetcode/leetcode435.cpp)
+* [leetcode 452 轉換成計算重疊區間問題](./leetcode/leetcode452.cpp)
+* [leetcode 55 Jump Game](./leetcode/leetcode55.cpp)
+* [leetcode 45 Jump Game II (DP會TLE)](./leetcode/leetcode45.cpp)
 
 ### 並查集Union find
 * [leetcode 261](./leetcode/leetcode261.cpp)  
