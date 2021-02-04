@@ -504,6 +504,9 @@ dp[i][0][1] = INT_MIN
 * [lintcode 151 交易兩次](./lintcode/lintcode151.cpp)
 * [lintcode 393 k次交易 內存爆炸怎麼解決](./lintcode/lintcode393.cpp)
 
+正則表達式問題：  
+* [leetcode 10 另外分析'*'的情況](./leetcode/leetcode10.cpp)
+
 > DP是用來將指數時間和階層時間的問題優化成O(n^2), O(n^3)的。如果問題本來就可以在更短的時間內解決，那代表dp是不適用的方法
 
 > DP數組跟遞歸就只有一線之隔。差距在於DP數組由底向上求解(問題規模由小到大)，遞歸由頂向下求解(問題規模由大而小)
