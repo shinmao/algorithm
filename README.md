@@ -457,13 +457,14 @@ arr1前i個和arr2前j個的關係為dp[i][j]
 
 > 區間型dp最有名的優化方式：用四邊形不等式優化枚舉切割點的時間
 
-> 區間型dp常見的定義是dp[i][j] = dp[i][k] + dp[k + 1][j]，也就是更小區間的最優解。不過就要注意，在運算dp陣列時k不能用枚舉的，因為後面的區間結果我們根本還沒有！取而代之，可以用長度枚舉。
+> 區間型dp常見的定義是dp[i][j] = dp[i][k] + dp[k + 1][j]，也就是更小區間的最優解。不過就要注意，在運算dp陣列時k不能用枚舉的，因為後面的區間結果我們根本還沒有！取而代之，可以用長度枚舉。  
 
-
-雖然用數組先把答案存起來像dp，但沒有順序性，單純由dfs traverse的memoi類型：  
-* [leetcode 337 樹上dp](./leetcode/leetcode337.cpp)  
-* [正則...]()  
-* [lintcode 107 word break](./lintcode/lintcode107.cpp)   
+博弈型dp：  
+這類問題都是兩個人交替進行選擇  
+難點在於先手會影響後手的結果  
+套路通常就是使用二維dp，然後裡面在個別存先手和後手的結果(e.g. `pair<int, int>(first, second)`)  
+上面的first和second個別代表先手後手使用決策所得到的最優結果  
+* [leetcode 877 石子遊戲](./leetcode/leetcode877.cpp)  
 
 背包問題：  
 狀態： 背包的容量, 可選擇的物品  
@@ -520,6 +521,11 @@ dp[i][0][1] = INT_MIN
 
 丟雞蛋問題(當然丟什麼都行)：  
 * [leetcode 887](./leetcode/leetcode887.cpp)  
+
+打家劫舍問題(House Robber)：  
+* [leetcode 198 House Robber](./leetcode/leetcode198.cpp)
+* [leetcode 213 House Robber + 房子繞成一圈](./leetcode/leetcode213.cpp)
+* [leetcode 337 House Robber + 房子二叉樹](./leetcode/leetcode337.cpp)
 
 > DP是用來將指數時間和階層時間的問題優化成O(n^2), O(n^3)的。如果問題本來就可以在更短的時間內解決，那代表dp是不適用的方法
 
