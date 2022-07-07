@@ -28,15 +28,31 @@
 #### Stack
 * [leetcode 20 判斷括號合法性](./leetcode/leetcode20.cpp)
 
-### 遞迴
+### 遞迴 Recursion
 遞迴通常會在`return`裏又回call一次function。遞迴是用來**間接**告訴你答案的，而非直接的。某一層做的事都是一樣的，所以我們只要管好自己這層的工作就好。另外遞迴一定會有終止條件(類似在開頭寫個`if() return`之類的)。    
 1. 分治法
 2. 以遞迴來窮舉(也就是後來的dfs，用於traverse)
 3. 又稱作tree search algorithm，以樹狀圖展開所有組合，取代brute force
 
-1. 定義好function
+1. **定義好function**
 2. 分解每一層的工作
 3. 找到停止條件
+
+反轉鏈表：  
+tree說白了其實也是一種linked list，那既然tree可以倒序遍歷了，當然linked list也可以  
+用function stack的特性就可以倒著遍歷linked list囉！  
+```cpp
+// 若要反轉前3個
+1->2->3->4->5->6
+1->2->3  //用succesor記下4的位置，然後return 3的位置
+1->2<-3  // 透過head->next->next = head來反轉箭頭
+1<-2<-3
+// 將1指向4，並且return 收到的3的位置，搞定！
+3->2->1->4->5->6
+```
+* [leetcode 206 反轉整個鏈表](./leetcode/leetcode206.cpp)
+* [leetcode 92 反轉指定區間的鏈表](./leetcode/leetcode92.cpp)
+* [leetcode 234 判斷鏈表是否為回文串 用function會開stack的特性強行倒序遍歷鏈表 / 另外也可以用快慢指針 從慢指針開始反轉鏈表](./leetcode/leetcode234.cpp)
 
 > 面試的時候還是主動問一下能不能用recursion，通常是可以的！
 
@@ -112,7 +128,7 @@ while(start <= end) {
 if(right < 0 || nums[right] != target)
     return -1;
 return right;
-```  
+```
 
 :star: 再次更新  
 感謝@labuladong  
@@ -266,7 +282,7 @@ while(...) {
 		}
 	}
 }
-``` 
+```
 
 拓墣 用於有向無環圖，我們可以用它來判斷圖裡有沒有環，如果有那traverse也會失敗。拓墣排序還常拿來判斷兩個點之間有沒有路線，但這樣用 disjoint set 更快更簡潔。  
 1. 統計所有點的in-degree
@@ -425,8 +441,8 @@ dp[i][j]:
 arr1前i個和arr2前j個的關係為dp[i][j]
 若只有一個字串或數組，代表arr[i...j]為dp[i][j]
 ```
-* [leetcode 516](./leetcode/leetcode516.cpp)
-* ([回文substring的話請參考leetcode 5](./leetcode/leetcode5.cpp))
+* ([leetcode 5 Longest Palindrome Substring (這題dp反而不好做)](./leetcode/leetcode5.cpp))  
+* [leetcode 516 Longest Palindrome Subsequence](./leetcode/leetcode516.cpp)  
 * [leetcode 256](./leetcode/leetcode256.cpp)
 * [leetcode 72](./leetcode/leetcode72.cpp)
 * [leetcode 300 (Longest Increasing Subsequence) (+ binary search)](./leetcode/leetcode300.cpp)
@@ -435,7 +451,9 @@ arr1前i個和arr2前j個的關係為dp[i][j]
 * [leetcode 583 (拐著彎叫你求LCS)](./leetcode/leetcode583.cpp)
 * [leetcode 712 (求最大ASCII sum的 LCS)](./leetcode/leetcode712.cpp)
 
-> LIS可以用patience sorting解，時間複雜度對數級別
+> 回文串的部分要考慮單中心和雙中心  
+
+> LIS可以用patience sorting解，時間複雜度對數級別  
 
 劃分型dp：  
 * [leetcode 139 word break](./leetcode/leetcode139.cpp)
