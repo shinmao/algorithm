@@ -10,20 +10,6 @@
 | 10   | O(2^n), O(n!)      | dfs, recursion |
 | 10^9   |       | 別再開array了 |
 
-### 出題頻率 by TA
-#### 很常见
-* bfs/dfs
-* 经典题：word ladder, word break, k largest...
-* 模拟（题目叫你做什么，你就做什么） Strange sort problem  Interger -> roman 
-#### 非常常见
-* 二叉树、dp（背包、序列型dp、坐标型、双序列型（Longest Common Substring/Subsequence）、常见问题（L Increasing Subsequence，L Palindrome String））
-、二分答案、前缀和与双指针
-* LRU、LFU，linkedlist（快慢指针，copy linkedlist with random pointer），扫描线和一些简单的数据结构
-（treemap, hashmap, heap， union find，trie...)
-#### 考得很少
-* 二分搜索（二分数值），比较难的dp（状压dp（Travel Salesman Problem），概率dp，区间dp），（手写）红黑树，dfs的非递归实现，矩阵快速幂
-* dij, spfa, KMP ...
-
 ### 資料結構的妙用
 #### Stack
 * [leetcode 20 判斷括號合法性](./leetcode/leetcode20.cpp)
